@@ -1,13 +1,17 @@
 <template>
-    <b-button>heello</b-button>
+  <div class="has-text-centered">
+    <Canvas width="800" height="500"></Canvas>
+  </div>
 </template>
 
 
 <script>
+import Canvas from './Canvas';
+
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+  components: {
+    Canvas
   }
 }
 </script>
