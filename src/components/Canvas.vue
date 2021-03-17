@@ -2,6 +2,7 @@
   <div>
     <canvas
       id="canvas"
+      class="app-border"
       :width="width"
       :height="height"
       @mousedown="handleMouseDown"
@@ -169,9 +170,5 @@ export default {
 .color-orange {
     color: sandybrown
 }
-canvas {
-  box-shadow: 10px 10px 5px whitesmoke;
-  border: 3px solid #dedede;
-  border-radius: 5px;
-}
+
 </style>

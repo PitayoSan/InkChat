@@ -1,8 +1,8 @@
 <template>
     <div class="box-button thin flex-container" 
-        :class="{'box': border}">
-        <div class="container">
-            <img class="is-rounded" :src="require('../assets/images/' + this.imgsrc)"/>
+        :class="{'app-border': border}">
+        <div class="image is-64x64 v-align">
+            <img :class="{'is-rounded' : round}" :src="imgsrc"/>
         </div>
         <div class="v-align has-text-left flex-expand-simple text">
             <p>{{text}}</p>
@@ -59,6 +59,7 @@ export default {
     props: {
         text: String,
         border: Boolean,
+        round: Boolean,
         imgsrc: String
     }
 }
