@@ -4,7 +4,6 @@
       id="canvas"
       :width="width"
       :height="height"
-      style="border: 2px solid"
       @mousedown="handleMouseDown"
       @mouseup="handleMouseUpOrOut"
       @mousemove="handleMouseMove"
@@ -16,18 +15,18 @@
         v-for="color of inkColors" 
         :key= color.name 
         pack="fas" 
-        icon="tint" 
-        size="is-large" 
+        icon="circle"
+        size="is-large"
         :class="[color.class, 'clickable']"
         @click.native="onColorSelect(color)">
       </b-icon>
+      <b-icon pack="fas" icon="trash" size="is-large" class="clickable" @click.native="clearCanvas"></b-icon>
     </div>
-    <b-button @click="clearCanvas">Clear</b-button>
-    <b-button @click="getImageInfo">Get Data</b-button>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "Canvas",
   props: {
@@ -169,5 +168,10 @@ export default {
 }
 .color-orange {
     color: sandybrown
+}
+canvas {
+  box-shadow: 10px 10px 5px whitesmoke;
+  border: 3px solid #dedede;
+  border-radius: 5px;
 }
 </style>
