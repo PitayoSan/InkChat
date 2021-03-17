@@ -1,5 +1,5 @@
 <template>
-    <div class="box thin">
+    <div class="box-button box thin">
         <div class="columns">
             <div class="column">
                 <div class="image is-64x64">
@@ -13,6 +13,19 @@
     </div>
 </template>
 <style scoped>
+.box-button {
+    transition: 0.15s;
+}
+
+.box-button:hover {
+    background-color:skyblue;
+    cursor: pointer;
+}
+
+.box-button:active {
+    background-color:steelblue;
+}
+
 .v-align {
     display: flex;
     flex-direction: column;
