@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <Home/>
+    <HelloWorld/>
+    <FriendsModal/>
   </div>
 </template>
 
 <script>
-import Home from './views/Home'
+import HelloWorld from './components/HelloWorld.vue'
+import FriendsModal from './components/Friends.vue'
 
 export default {
   name: 'App',
   components: {
-    Home
+    HelloWorld,
+    FriendsModal
   }
 }
 </script>
