@@ -1,17 +1,27 @@
 <template>
-    <main class="columns" style="padding-top: 10vh;">
-        <div class="column is-one-fifth" style="padding-top: 15vh;">
-            <BoxButton text="Grupos"/>
-            <br><br>
-            <BoxButton text="Amigos"/>
-        </div>
-        <div class="column has-text-centered">
-            <Canvas width="800" height="500" />
-        </div>
-        <div class="column is-one-fifth">
-            <BoxButton text="Charlie"/>
-        </div>
+    <main>
+        <nav class="columns app-title">
+            <div class="column is-one-fifth"></div>
+            <div class="column has-text-centered v-align">
+                <h1 class="title" style="color: #ff4d8e;">InkChat</h1>
+            </div>
+            <div class="column is-one-fifth">
+                <BoxButton text="Charlie" :border="false"/>
+            </div>
+        </nav>
+        <section class="columns">
+            <div class="column is-one-fifth">
+                <BoxButton text="Grupos" :border="true"/>
+                <br>
+                <BoxButton text="Amigos" :border="true"/>
+            </div>
+            <div class="column has-text-centered">
+                <Canvas width="800" height="500" />
+            </div>
+            <div class="column is-one-fifth"></div>
+        </section>
     </main>
+    
 </template>
 
 <script>
@@ -26,3 +36,16 @@ export default {
     }
 }
 </script>
+<style scoped>
+.app-title {
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+.head {
+    display: inline-block;
+}
+.profile {
+    max-width: 250px;
+    background-color: tomato;
+}
+</style>

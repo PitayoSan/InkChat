@@ -1,15 +1,12 @@
 <template>
-    <div class="box-button box thin">
-        <div class="columns">
-            <div class="column">
-                <div class="image is-64x64">
-                    <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png"/>
-                </div>
-            </div>
-            <div class="column v-align">
-                <p>{{text}}</p>
-            </div>
-        </div>             
+    <div class="box-button thin flex-container" 
+        :class="{'box': border}">
+        <div class="image is-64x64">
+            <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png"/>
+        </div>
+        <div class="v-align has-text-left flex-expand-simple text">
+            <p>{{text}}</p>
+        </div>           
     </div>
 </template>
 <style scoped>
@@ -25,11 +22,8 @@
 .box-button:active {
     background-color:steelblue;
 }
-
-.v-align {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.text {
+    padding-left: 20px;
 }
 .thin {
     padding: 0.5rem;
@@ -39,7 +33,8 @@
 export default {
     name: 'BoxButton',
     props: {
-        text: String
+        text: String,
+        border: Boolean
     }
 }
 </script>
