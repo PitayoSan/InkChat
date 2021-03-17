@@ -1,0 +1,13 @@
+.v-align {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-expand-simple {
+    flex-grow: 1;
+}

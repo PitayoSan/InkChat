@@ -28,6 +28,7 @@
                     <FriendRequest fname="🅱iguel" imgsrc='octoling.jpg'/>
                     <FriendRequest fname="Wis" imgsrc='inkling.jpg'/>
                     <FriendRequest fname="Rodrigo" imgsrc='kingpin.jpg'/>
+                    <FriendRequest fname="Vítor" imgsrc='palutena.png'/>
                 </div>
                 <div class="bottom">
                     <b-input placeholder="Username" size="is-small"></b-input>
@@ -40,7 +41,6 @@
                 </div>
             </b-sidebar>
         </section>
-        <b-button @click="open = true">Show</b-button>
     </div>
 </template>
 
@@ -57,6 +57,11 @@ export default {
       open: false,
       username: 'Charli'
     }
+  },
+  methods: {
+      openTrue() {
+          this.open = true;
+      }
   }
 }
 </script>
@@ -87,7 +92,7 @@ export default {
     }
 
     .top-element{
-        margin-top: 40px;
+        margin-top: 20px;
     }
 
     .flex-center{
