@@ -1,16 +1,21 @@
 <template>
+  <div>
+    <Sidebar/>
   <div id="app">
     <HelloWorld/>
+  </div>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import Sidebar from './components/Sidebar.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    Sidebar
   }
 }
 </script>

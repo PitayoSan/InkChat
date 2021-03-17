@@ -8,9 +8,9 @@ import 'buefy/dist/buefy.css'
 // Use fontawesome icons
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faTint } from '@fortawesome/free-solid-svg-icons'
+import { faTint, faUser, faUserCheck, faUserTimes } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTint)
+library.add(faTint, faUser, faUserCheck, faUserTimes)
 Vue.component('vue-fontawesome', FontAwesomeIcon);
 
 
