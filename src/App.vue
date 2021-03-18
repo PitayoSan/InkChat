@@ -1,19 +1,20 @@
 <template>
   <div id="app">
-    <HelloWorld/>
-    <FriendsModal/>
+    <Home />
+    <!-- <FriendsModal/> -->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import FriendsModal from './components/Friends.vue'
+//import HelloWorld from './components/HelloWorld.vue'
+//import FriendsModal from './components/Friends.vue'
+import Home from './views/Home';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    FriendsModal
+    Home
+    //FriendsModal
   }
 }
 </script>
