@@ -92,7 +92,7 @@ export default {
             this.$refs.sbar.openTrue();
         },
         info() {
-            fetch('https://biguel.pythonanywhere.com/').then(data => {
+            fetch('http://biguel.pythonanywhere.com/').then(res => res.text()).then(data => {
                 alert(data);
             })
         }
