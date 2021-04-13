@@ -1,0 +1,18 @@
+.v-align {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-expand-simple {
+    flex-grow: 1;
+}
+
+.app-border {
+    border: 3px solid #dedede;
+    border-radius: 5px;
+}

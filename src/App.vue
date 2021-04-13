@@ -1,16 +1,20 @@
 <template>
   <div id="app">
-    <HelloWorld/>
+    <Home />
+    <!-- <FriendsModal/> -->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+//import HelloWorld from './components/HelloWorld.vue'
+//import FriendsModal from './components/Friends.vue'
+import Home from './views/Home';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Home
+    //FriendsModal
   }
 }
 </script>
@@ -22,6 +26,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   /*text-align: center;*/
   color: #2c3e50;
-  margin-top: 60px;
+  /*margin-top: 60px;*/
 }
 </style>
