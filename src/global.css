@@ -16,3 +16,13 @@
     border: 3px solid #dedede;
     border-radius: 5px;
 }
+
+.full-height-main{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.almost-v-centered {
+    padding-top: 20vh;
+}
