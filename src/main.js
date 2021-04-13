@@ -9,9 +9,9 @@ import './global.css'
 // Use fontawesome icons
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faTint, faCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTint, faUser, faUserCheck, faUserTimes, faCircle, faTrash  } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTint, faCircle, faTrash)
+library.add(faTint, faUser, faUserCheck, faUserTimes, faCircle, faTrash)
 Vue.component('vue-fontawesome', FontAwesomeIcon);
 
 

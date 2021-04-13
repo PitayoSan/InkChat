@@ -11,3 +11,8 @@
 .flex-expand-simple {
     flex-grow: 1;
 }
+
+.app-border {
+    border: 3px solid #dedede;
+    border-radius: 5px;
+}
