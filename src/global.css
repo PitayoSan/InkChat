@@ -26,3 +26,9 @@
 .almost-v-centered {
     padding-top: 20vh;
 }
+
+.border {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+}
