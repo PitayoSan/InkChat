@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import { auth } from './firebase'
+import store from './store'
 
 // Routes
 import routes from './routes';
@@ -31,3 +33,18 @@ new Vue({
   render: h => h(App),
   router: new VueRouter({routes, mode: 'history'})
 }).$mount('#app')
+
+let app;
+auth.onAuthStateChanged(user => {
+	if(!app) {
+		app = new Vue({
+			router: new VueRouter({routes, mode: 'history'}),
+			store,
+			render: h => h(App)
+		}).$mount('#app')
+	}
+
+	if(user) {
+		store.dispatch('fetchUserProfile', user)
+	}
+});

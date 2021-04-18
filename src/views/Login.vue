@@ -28,6 +28,23 @@
 
 <script>
 export default {
-    name: 'Login'
+    name: 'Login',
+	data() {
+		return {
+			form: {
+				email: '',
+				password: ''
+			}
+		}
+	},
+	methods: {
+		onSubmit(evt) {
+			evt.preventDefault();
+			this.$store.dispatch('login', {
+				email: this.form.email,
+				password: this.form.password
+			});
+		}
+	}
 }
 </script>
