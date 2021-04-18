@@ -5,7 +5,7 @@ import { auth } from './firebase'
 import store from './store'
 
 // Routes
-import routes from './routes';
+import router from './router';
 
 // Buefy imports
 import Buefy from 'buefy'
@@ -29,16 +29,16 @@ Vue.use(Buefy, {
 
 Vue.use(VueRouter);
 
-new Vue({
+/*new Vue({
   render: h => h(App),
   router: new VueRouter({routes, mode: 'history'})
-}).$mount('#app')
+}).$mount('#app')*/
 
 let app;
 auth.onAuthStateChanged(user => {
 	if(!app) {
 		app = new Vue({
-			router: new VueRouter({routes, mode: 'history'}),
+			router,
 			store,
 			render: h => h(App)
 		}).$mount('#app')

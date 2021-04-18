@@ -6,16 +6,16 @@
             </div>
             <br><br><br>
             <b-field label="Email">
-                <b-input type="email"></b-input>
+                <b-input v-model="form.email" type="email"></b-input>
             </b-field>
             <b-field label="Password">
-                <b-input type="password"></b-input>
+                <b-input v-model="form.password" type="password"></b-input>
             </b-field>
             <div class="has-text-centered">
                 <router-link to="/forgot">Forgot password?</router-link>
             </div>
             <br><br><br>
-            <b-button expanded tag="router-link" to="/home">Login</b-button>
+            <b-button expanded @click="onSubmit">Login</b-button>
             <br><br>
             <div class="has-text-centered">
                 <router-link to="/register">Create Account</router-link>

@@ -1,13 +1,7 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import * as fb from '../firebase';
-import routes from '../routes';
-
-let router = new VueRouter({
-    mode: 'history',
-    routes
-})
+import router from '../router';
 
 Vue.use(Vuex);
 
