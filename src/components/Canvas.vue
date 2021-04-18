@@ -33,6 +33,7 @@ export default {
   props: {
     width: String,
     height: String,
+    theName: String
   },
   data() {
       return {
@@ -129,8 +130,16 @@ export default {
           this.drawLine();
       }
     },
-    getImageInfo() {
-        console.log(this.ctx.getImageData(0, 0, this.width, this.height))
+    getImageData() {
+      let data = this.ctx.getImageData(0, 0, +this.width, +this.height);
+      console.log(data);
+      return data;
+    },
+    putImageData(imageData) {
+      this.ctx.putImageData(imageData, this.width, this.height);
+    },
+    test() {
+      console.log(this.theName);  
     }
   },
   mounted() {
