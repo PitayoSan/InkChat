@@ -1,12 +1,12 @@
 <template>
     <main class="columns has-text-centered is-align-items-center" style="height: 100vh;">
         <section class="column">
-            <Canvas ref="left" width="200" height="200" theName="left one"/>
+            <Canvas ref="left" width="500" height="500" theName="left one"/>
             <br>
             <b-button @click="send('left', 'right')">Send</b-button>
         </section>
         <section class="column">
-            <Canvas ref="right" width="200" height="200" theName="right one"/>
+            <Canvas ref="right" width="500" height="500" theName="right one"/>
             <br>
             <b-button @click="send('right', 'left')">Send</b-button>
         </section>
@@ -22,13 +22,11 @@ export default {
         Canvas
     },
     methods: {
-        send(sends) {
+        send(sends, receives) {
             let sender = this.$refs[sends];
-            // let receiver = this.$refs[receives];
-            sender.getImageData();
-            // console.log(imageData);
-            // receiver.putImageData(imageData);
-
+            let receiver = this.$refs[receives];
+            let imageData = sender.getImageData();
+            receiver.putImageData(imageData);
         }
     }
 }

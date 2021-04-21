@@ -1,7 +1,7 @@
 <template>
   <div>
     <canvas
-      id="canvas"
+      :id="theName"
       class="app-border"
       :width="width"
       :height="height"
@@ -132,11 +132,12 @@ export default {
     },
     getImageData() {
       let data = this.ctx.getImageData(0, 0, +this.width, +this.height);
-      console.log(data);
       return data;
     },
     putImageData(imageData) {
-      this.ctx.putImageData(imageData, this.width, this.height);
+      //console.log(`${this.theName}: Receiving imageData`)
+      //this.ctx.putImageData(imageData, +this.width, +this.height);
+      this.ctx.putImageData(imageData, 0, 0);
     },
     test() {
       console.log(this.theName);  
@@ -144,10 +145,13 @@ export default {
   },
   mounted() {
         
-        this.canvas = document.getElementById('canvas');
+        this.canvas = document.getElementById(this.theName)
         this.ctx = this.canvas.getContext('2d');
         this.onColorSelect(this.inkColors[0]);
         this.onWidthSelect(5);
+        // this.ctx.rect(10, 10, 100, 100)
+        // this.ctx.fill()
+        
         
   },
   computed: {
