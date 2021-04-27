@@ -1,6 +1,6 @@
 <template>
-    <main class="full-height-main">
-        <section class="almost-v-centered">
+    <main class="columns is-justify-content-center almost-v-centered">
+        <section class="column is-12-mobile is-5-tablet is-5-desktop is-3-fullhd border">
             <div class="has-text-centered">
                 <h1 class="title">InkChat</h1>
             </div>
@@ -20,8 +20,6 @@
             <div class="has-text-centered">
                 <router-link to="/register">Create Account</router-link>
             </div>
-            
-
         </section>
     </main>
 </template>
@@ -31,3 +29,4 @@ export default {
     name: 'Login'
 }
 </script>
+
