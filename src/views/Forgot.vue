@@ -1,6 +1,6 @@
 <template>
-    <main class="full-height-main">
-        <section class="almost-v-centered has-text-centered tight">
+    <main class="columns is-justify-content-center almost-v-centered">
+        <section class="column is-12-mobile is-7-tablet is-6-desktop is-3-fullhd has-text-centered justify-content-center border">
             <h1 class="title">Forgot your password?</h1>
             <p>
                 Don't worry! Just give us your email address
@@ -26,5 +26,8 @@ export default {
 <style scoped>
 .tight {
     max-width: 20vw;
+}
+.constraint {
+    max-width: 375px;
 }
 </style>
