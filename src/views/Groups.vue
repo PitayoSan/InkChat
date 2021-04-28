@@ -1,6 +1,6 @@
 <template>
     <div class="columns is-multiline">
-        <div class="column is-4" v-for="friend of friends" :key="friend.usernames">
+        <div class="column is-12" v-for="group of groups" :key="group.usernames">
             <div class="card">
                 <div class="card-content">
                     <div class="media flex-container">
@@ -10,7 +10,8 @@
                             </figure>
                         </div>
                         <div class="media-content v-align">
-                            <p class="title is-4">{{friend.username}}</p>
+                            <p class="title is-4">{{group.name}}</p>
+                            <p class="description is-4">{{group.description}}</p>
                         </div>
                         </div>
 
@@ -31,30 +32,29 @@
 </template>
 
 <script>
-//v-for="friend of friends" :key="friend.username"
 export default {
-    name: "Friends",
+    name: "Groups",
     data() {
         return {
-            friends: [
+            groups: [
                 {
-                    username: "Wis Luilson",
+                    name: "Hentai Simulator 7",
+                    description: "Proyecto de Ken",
                     icon: "https://bulma.io/images/placeholders/96x96.png",
                 },
                 {
-                     username: "ziv va",
+                    name: "ISC en Drogas",
+                    description: "Aquí no se venden drogas",
                     icon: "https://bulma.io/images/placeholders/96x96.png",
                 },
                 {
-                     username: "Larly Chopez",
+                    name: "La Banda Gangrena",
+                    description: "Aquí sí se venden drogas",
                     icon: "https://bulma.io/images/placeholders/96x96.png",
                 },
                 {
-                     username: "Biguel Marro",
-                    icon: "https://bulma.io/images/placeholders/96x96.png",
-                },
-                {
-                     username: "Roberto Félix",
+                    name: "Tianguis Tec",
+                    description: "Aquí se vende todo menos drogas (tal vez)",
                     icon: "https://bulma.io/images/placeholders/96x96.png",
                 }
             ]

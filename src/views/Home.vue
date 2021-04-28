@@ -28,7 +28,7 @@
                 />
             </div>
             <div class="column has-text-centered">
-                <Canvas width="800" height="500" />
+                <Canvas width="800" height="500" theName="homeCanvas"/>
             </div>
             <div class="column is-one-fifth"></div>
         </section>
