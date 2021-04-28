@@ -3,7 +3,8 @@ import Login from './views/Login';
 import Forgot from './views/Forgot';
 import Register from './views/Register';
 import VueRouter from 'vue-router';
-import Studio from './views/Studio'
+import Studio from './views/Studio';
+import Test from './views/Test';
 
 const routes = [
     { path: '/', component: Login, meta: {requiresAuth: false}},
@@ -11,6 +12,7 @@ const routes = [
     { path: '/register', component: Register, meta: {requiresAuth: true}},
     { path: '/forgot', component: Forgot, meta: {requiresAuth: true}},
     { path: '/studio', component: Studio, meta: {requiresAuth: false}},
+    { path: '/test', component: Test, meta: {requiresAuth: false}},
 ]
 
 export default new VueRouter({
