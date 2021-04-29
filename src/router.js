@@ -5,6 +5,8 @@ import Register from './views/Register';
 import VueRouter from 'vue-router';
 import Studio from './views/Studio';
 import Test from './views/Test';
+import Friends from './views/Friends';
+import Groups from './views/Groups';
 
 const routes = [
     { path: '/', component: Login, meta: {requiresAuth: false}},
@@ -13,6 +15,8 @@ const routes = [
     { path: '/forgot', component: Forgot, meta: {requiresAuth: true}},
     { path: '/studio', component: Studio, meta: {requiresAuth: false}},
     { path: '/test', component: Test, meta: {requiresAuth: false}},
+    { path: '/friends', component: Friends, meta: {requiresAuth: false}},
+    { path: '/groups', component: Groups, meta: {requiresAuth: false}},
 ]
 
 export default new VueRouter({
