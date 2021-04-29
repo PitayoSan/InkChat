@@ -131,13 +131,15 @@ export default {
       }
     },
     getImageData() {
-      let data = this.ctx.getImageData(0, 0, +this.width, +this.height);
-      return data;
+      // let data = this.ctx.getImageData(0, 0, +this.width, +this.height);
+      // return data;
+      return this.canvas.toDataURL()
     },
     putImageData(imageData) {
       //console.log(`${this.theName}: Receiving imageData`)
       //this.ctx.putImageData(imageData, +this.width, +this.height);
-      this.ctx.putImageData(imageData, 0, 0);
+      // this.ctx.putImageData(imageData, 0, 0);
+      this.canvas.src = imageData;
     },
     test() {
       console.log(this.theName);  

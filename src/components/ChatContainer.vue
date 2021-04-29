@@ -1,6 +1,7 @@
 <template>
     <main>
         <Canvas ref="aCanvas" width="500" height="500" :theName="theName"/>
+        <img id="mess" src=""/>
         <b-field>
             <b-button @click="sendMessage">Send</b-button>
         </b-field>
@@ -24,18 +25,13 @@ export default {
     },
     methods: {
         messageRecevied(msg) {
-            console.log('receiving message...')
-            ///console.log(msg.message)
-            this.$refs['aCanvas'].putImageData(msg.message);
+            document.getElementById('mess').src = msg.message
         },
         sendMessage() {
             console.log('sending message...')
             let msg = this.$refs['aCanvas'].getImageData();
-            //console.log(msg)
-            this.$pnPublish({channel: 'ch1', message: msg}, (status, response) => {
-                console.log(status);
-                console.log(response);
-            })
+            console.log(msg);
+            this.$pnPublish({channel: 'ch1', message: msg})
         }
     },
     created() {
