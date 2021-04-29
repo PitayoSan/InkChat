@@ -1,6 +1,7 @@
 <template>
     <main class="columns has-text-centered is-align-items-center" style="height: 100vh;">
         <section class="column">
+            <img id="theImage" src="">
             <Canvas ref="left" width="500" height="500" theName="left one"/>
             <br>
             <b-button @click="send('left', 'right')">Send</b-button>
@@ -23,10 +24,12 @@ export default {
     },
     methods: {
         send(sends, receives) {
+            console.log("sending...")
             let sender = this.$refs[sends];
             let receiver = this.$refs[receives];
             let imageData = sender.getImageData();
             receiver.putImageData(imageData);
+            document.getElementById('theImage').src = imageData
         }
     }
 }
