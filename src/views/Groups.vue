@@ -13,29 +13,31 @@
                             <p class="title is-4">{{group.name}}</p>
                             <p class="description is-4">{{group.description}}</p>
                         </div>
-                        </div>
+                    </div>
 
                         <div class="columns">
                             <div class="column is-6">
                                 <b-button expanded type="is-info is-light">Chatear</b-button>    
                             </div>
                             <div class="column is-6">
-                                <b-button expanded type="is-danger is-light">Eliminar</b-button>
+                                <b-button expanded type="is-danger is-light">Abandonar</b-button>
                             </div>
                             
                         </div>
                 </div>
-    </div>
+            </div>
         </div>
     </div>
-    
 </template>
 
 <script>
+import groupsApi from '../../axios/src/Groups';
+import { mapState } from 'vuex';
+
 export default {
     name: "Groups",
     data() {
-        return {
+        return { /*
             groups: [
                 {
                     name: "Hentai Simulator 7",
@@ -58,7 +60,21 @@ export default {
                     icon: "https://bulma.io/images/placeholders/96x96.png",
                 }
             ]
+            */
         }
+    },
+    
+    computed: {
+            ...mapState(['userProfile'])
+    },
+
+    created: function(){
+        groupsApi.getGroups(this.userProfile.uid)
+                    .then(usr => {
+                        console.log(usr);
+                        //usr = this.setDefaults(component);
+                        //this.component = component;
+                    })
     }
 }
 </script>

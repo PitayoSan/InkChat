@@ -24,41 +24,57 @@
                             
                         </div>
                 </div>
-    </div>
+            </div>
         </div>
     </div>
     
 </template>
 
 <script>
-//v-for="friend of friends" :key="friend.username"
+//import { friendsApi } from '../../axios/src/api';
+import friendsApi from '../../axios/src/Friends';
+import mapState from 'vuex';
+
 export default {
     name: "Friends",
     data() {
         return {
-            friends: [
+            /*friends: [
                 {
                     username: "Wis Luilson",
                     icon: "https://bulma.io/images/placeholders/96x96.png",
                 },
                 {
-                     username: "ziv va",
+                    username: "ziv va",
                     icon: "https://bulma.io/images/placeholders/96x96.png",
                 },
                 {
-                     username: "Larly Chopez",
+                    username: "Larly Chopez",
                     icon: "https://bulma.io/images/placeholders/96x96.png",
                 },
                 {
-                     username: "Biguel Marro",
+                    username: "Biguel Marro",
                     icon: "https://bulma.io/images/placeholders/96x96.png",
                 },
                 {
-                     username: "Roberto Félix",
+                    username: "Roberto Félix",
                     icon: "https://bulma.io/images/placeholders/96x96.png",
                 }
-            ]
+            ]*/
         }
+    },
+
+    computed: {
+        ...mapState(['userProfile'])
+    },
+
+    created: function(){
+        friendsApi.getFriends(this.userProfile.uid)
+                    .then(usr => {
+                        console.log(usr);
+                        //usr = this.setDefaults(component);
+                        //this.component = component
+                    })
     }
 }
 </script>
