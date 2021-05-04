@@ -7,6 +7,7 @@ import Studio from './views/Studio';
 import Test from './views/Test';
 import Friends from './views/Friends';
 import Groups from './views/Groups';
+import Layout from './views/Layout';
 
 const routes = [
     { path: '/', component: Login, meta: {requiresAuth: false}},
@@ -17,6 +18,7 @@ const routes = [
     { path: '/test', component: Test, meta: {requiresAuth: false}},
     { path: '/friends', component: Friends, meta: {requiresAuth: false}},
     { path: '/groups', component: Groups, meta: {requiresAuth: false}},
+    { path: '/layout', component: Layout, meta: {requiresAuth: false}},
 ]
 
 export default new VueRouter({
