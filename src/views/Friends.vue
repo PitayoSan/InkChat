@@ -33,7 +33,7 @@
 <script>
 //import { friendsApi } from '../../axios/src/api';
 import friendsApi from '../../axios/src/Friends';
-import mapState from 'vuex';
+import {mapState} from 'vuex';
 
 export default {
     name: "Friends",
