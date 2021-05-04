@@ -1,6 +1,9 @@
 <template>
-    <section id="messagesWindow" class="flex-expand-simple flex-grow-scroll">
-        <ChatBubble v-for="(m, i) of msgs" :key="i" :data="m"/>
+    <section class="flex-container direction-col" style="height: 100%;">
+        <!-- <section class="box has-text-left is-marginless">Talking with: Charlie</section> -->
+        <section id="messagesWindow" class="flex-expand-simple flex-grow-scroll">
+            <ChatBubble v-for="(m, i) of msgs" :key="i" :data="m"/>
+        </section>
     </section>
 </template>
 
@@ -40,7 +43,7 @@ export default {
 </script>
 
 <style scoped>
-section {
+#messagesWindow {
     background-color: #ede7e4;
 }
 </style>

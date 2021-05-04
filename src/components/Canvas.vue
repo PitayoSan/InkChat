@@ -11,7 +11,7 @@
       @mouseout="handleMouseUpOrOut"
     >
     </canvas>
-    <div class="block">
+    <div class="block has-text-centered">
       <b-icon 
         v-for="color of inkColors" 
         :key= color.name 

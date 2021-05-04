@@ -1,6 +1,6 @@
 <template>
-    <section class="padding-std">
-        <Canvas ref="ownCanvas" width="200" height="200" theName="myCanvas"/>
+    <section id="area" class="padding-std">
+        <Canvas ref="ownCanvas" width="300" height="300" theName="myCanvas"/>
         <b-button @click="sendMessage" type="is-primary" expanded>Send</b-button>
     </section>
 </template>
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style scoped>
-/* section {
+/* #area {
     background-color: lightblue;
 } */
 </style>

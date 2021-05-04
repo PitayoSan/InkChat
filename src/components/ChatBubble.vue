@@ -1,8 +1,8 @@
 <template>
     <section v-if="isOther" class="flex-container padding-std">
-        <div class="image is-64x64 flex-container">
+        <!-- <div class="image is-64x64 flex-container">
             <img class="is-rounded" src="https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/users%2Ftest%2Fprofile.jpg?alt=media&token=014349b0-9f06-4e8b-8677-8f3660945e60"/>
-        </div>
+        </div> -->
         <div class="padding-std bubble" style="background-color: lightblue; margin-left: 15px;">
             <img class="bubble" :src="data.message" style="max-width: 300px; max-height: 300px;"/>
         </div>
@@ -17,9 +17,9 @@
         <div class="padding-std bubble" style="background-color: pink; margin-right: 15px;">
             <img class="bubble" :src="data.message" style="max-width: 300px; max-height: 300px;"/>
         </div>
-        <div class="image is-64x64 flex-container">
+        <!-- <div class="image is-64x64 flex-container">
             <img class="is-rounded" src="https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/users%2Ftest%2Fprofile.jpg?alt=media&token=014349b0-9f06-4e8b-8677-8f3660945e60"/>
-        </div>
+        </div> -->
     </section>
 </template>
 
