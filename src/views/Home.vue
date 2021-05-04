@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="full-height flex-col">
         <Sidebar ref="sbar"/>
         <nav class="columns app-title">
             <div class="column is-one-fifth"></div>
@@ -15,7 +15,7 @@
                 :round="true"/>
             </div>
         </nav>
-        <section class="columns">
+        <section class="columns flex-expand-simple" id="all-cols">
             <div class="column is-one-fifth">
                 <BoxButton text="Grupos" :border="true" :round="true"
                 @click.native = "info"
@@ -27,8 +27,8 @@
                 imgsrc="https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Fheart-solid.svg?alt=media&token=e7f54740-6e0b-4406-801f-b93e9ff4e79c"
                 />
             </div>
-            <div class="column has-text-centered">
-                <Canvas width="800" height="500" theName="homeCanvas"/>
+            <div class="column has-text-centered flex-container direction-col" style="height: 100%;" id="chat-col">
+                <Chat/>
             </div>
             <div class="column is-one-fifth"></div>
         </section>
@@ -37,14 +37,14 @@
 </template>
 
 <script>
-import Canvas from '../components/Canvas';
 import BoxButton from '../components/BoxButton';
 import Sidebar from '../components/Sidebar';
+import Chat from '../components/Chat';
 
 export default {
     name: 'Home',
     components: {
-        Canvas,
+        Chat,
         BoxButton,
         Sidebar
     },
@@ -79,4 +79,13 @@ export default {
     max-width: 250px;
     background-color: tomato;
 }
+
+/* #all-cols {
+    background-color: blue;
+} */
+
+/* #chat-col {
+    background-color: red;
+} */
+
 </style>
