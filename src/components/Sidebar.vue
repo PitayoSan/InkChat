@@ -11,11 +11,11 @@
             >
                 <div class="p-1 flex-center top-element">
                     <div class="container">
-                        <img src='../assets/images/misato.jpg'>
+                        <img :src=userProfile.pp>
                     </div>
                     <div>
                         <b-icon icon="user"></b-icon>
-                        {{username}}
+                        {{userProfile.username}}
                     </div>
                     <b-button tag="a"
                         href="/pwd-change">
@@ -46,6 +46,7 @@
 
 <script>
 import FriendRequest from './FriendRequest.vue';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Sidebar',
@@ -54,9 +55,11 @@ export default {
   },
   data() {
     return {
-      open: false,
-      username: 'Charli'
+      open: false
     }
+  },
+  computed: {
+      ...mapState(['userProfile'])
   },
   methods: {
       openTrue() {
