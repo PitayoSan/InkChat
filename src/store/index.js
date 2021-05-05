@@ -9,7 +9,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
 		userProfile: {},
-		pubNubUUID: {}
+		pubNubUUID: {},
+		userFriends: {},
+		userGroups: {}
 	},
 	mutations: {
 		setUserProfile(state, val) {
@@ -17,6 +19,12 @@ export default new Vuex.Store({
 		},
 		setPubNubUUID(state, uuid) {
 			state.pubNubUUID = uuid;
+		},
+		setUserFriends(state, friends){
+			state.userFriends = friends;
+		},
+		setUserGroups(state, groups){
+			state.userGroups = groups;
 		}
 	}, // mutations vs actions: actions can be async
 	actions: {
@@ -43,7 +51,8 @@ export default new Vuex.Store({
 					if (router.currentRoute.path === '/') {
 						router.push('/home')
 					}
-					
+
+					return uid;
 				})
 				.catch(() => {
 					console.error("ERROR FETCHING USER FROM DATABASE");
@@ -71,6 +80,24 @@ export default new Vuex.Store({
 		},
 		setPubNubUUID({ commit }, uuid) {
 			commit('setPubNubUUID', uuid);
+		},
+		async getUserFriends({ commit }) {
+			let uid = fb.auth.currentUser.uid;
+			console.log(uid);
+			
+			api.friendsApi.getFriends(uid)
+			.then(res => {
+				commit('setUserFriends', res);
+			});
+		},
+		async getUserGroups({ commit }) {
+			let uid = fb.auth.currentUser.uid;
+			console.log(uid);
+			
+			api.groupsApi.getGroups(uid)
+			.then(res => {
+				commit('setUserGroups', res);
+			});
 		}
 	}
 });

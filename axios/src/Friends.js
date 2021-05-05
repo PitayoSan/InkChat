@@ -1,8 +1,9 @@
-import axios from 'axios';
+import axios from "./config/axios";
+//import axios from myAxios;
 
 export default {
 	getFriends: (id) => {
-		return axios.get(`/friends?user=${id}`);
+		return axios.get(`/friends?uid=${id}`);
 	},
 
 	getFriend: (id) => {

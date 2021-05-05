@@ -1,6 +1,6 @@
 <template>
     <div class="columns is-multiline">
-        <div class="column is-4" v-for="friend of friends" :key="friend.usernames">
+        <div class="column is-4" v-for="friend of userFriends" :key="friend.usernames">
             <div class="card">
                 <div class="card-content">
                     <div class="media flex-container">
@@ -32,7 +32,7 @@
 
 <script>
 //import { friendsApi } from '../../axios/src/api';
-import friendsApi from '../../axios/src/Friends';
+//import friendsApi from '../../axios/src/Friends';
 import {mapState} from 'vuex';
 
 export default {
@@ -65,16 +65,11 @@ export default {
     },
 
     computed: {
-        ...mapState(['userProfile'])
+        ...mapState(['userFriends'])
     },
 
     created: function(){
-        friendsApi.getFriends(this.userProfile.uid)
-                    .then(usr => {
-                        console.log(usr);
-                        //usr = this.setDefaults(component);
-                        //this.component = component
-                    })
+        this.$store.dispatch('getUserFriends');
     }
 }
 </script>

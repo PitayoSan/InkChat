@@ -1,6 +1,6 @@
 <template>
     <div class="columns is-multiline">
-        <div class="column is-12" v-for="group of groups" :key="group.usernames">
+        <div class="column is-12" v-for="group of userGroups" :key="group.usernames">
             <div class="card">
                 <div class="card-content">
                     <div class="media flex-container">
@@ -31,13 +31,14 @@
 </template>
 
 <script>
-import groupsApi from '../../axios/src/Groups';
+//import groupsApi from '../../axios/src/Groups';
 import { mapState } from 'vuex';
 
 export default {
     name: "Groups",
     data() {
-        return { /*
+        return { 
+            /*
             groups: [
                 {
                     name: "Hentai Simulator 7",
@@ -65,10 +66,14 @@ export default {
     },
     
     computed: {
-            ...mapState(['userProfile'])
+        ...mapState(['userGroups'])
     },
 
     created: function(){
+        this.$store.dispatch('getUserGroups');
+    }
+    /*
+    function(){
         groupsApi.getGroups(this.userProfile.uid)
                     .then(usr => {
                         console.log(usr);
@@ -76,5 +81,6 @@ export default {
                         //this.component = component;
                     })
     }
+    */
 }
 </script>

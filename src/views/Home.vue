@@ -39,7 +39,7 @@
         <section class="columns flex-expand-simple">
             <div class="column is-one-fifth" id="bottom-left-col">
                 <BoxButton text="Grupos" :border="true" :round="true"
-                @click.native = "info"
+                @click.native = "toGroups"
                 imgsrc="https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Fusers-solid.svg?alt=media&token=0b0313a3-5515-40b8-b5a5-99909086a20c"
                 />
                 <br>
@@ -89,8 +89,8 @@ export default {
         toFriends(){
             this.$router.push("/friends");
         },
-        info() {
-            console.log("CLicked groups...")
+        toGroups(){
+            this.$router.push("/groups");
         }
     }
 }
