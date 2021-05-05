@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import * as fb from '../firebase';
 import router from '../router';
+import api from '../../axios/src/api';
 
 Vue.use(Vuex);
 
@@ -19,28 +20,34 @@ export default new Vuex.Store({
 		}
 	}, // mutations vs actions: actions can be async
 	actions: {
-		async login({ dispatch }, form) {
-			// TODO: exception handling (promises)
-			// sign user in
-			const { user } = await fb.auth.signInWithEmailAndPassword(form.email, form.password);
+		// async login(form) {
+		// 	fb.auth.signInWithEmailAndPassword(form.email, form.password)
+		// 	.then(() => { console.log("xd")})
+		// 		.catch(() => {
+		// 			console.log("ERROR LOGGING IN")
+		// 		})
+		// },
+		async fetchUserProfile({ commit, dispatch }) {
+			// Using firebase uid, fetch all user data from db.
+			let uid = fb.auth.currentUser.uid;
+			console.log("the uid: ", uid);
+			api.usersApi.getUser(uid)
+				.then(dbUser => {
+					// Commit user profile in state
+					commit('setUserProfile', dbUser);
 
-			// set pubnub uuid:
-			dispatch('setPubNubUUID', 'test_uuid')
+					// set pubnub uuid:
+					dispatch('setPubNubUUID', 'test_uuid')
 
-			// fetch user profile and set in state
-			dispatch('fetchUserProfile', user);
-		},
-		async fetchUserProfile({ commit }, user) {
-			// fetch user profile
-			const userProfile = user; // TODO: get user from db
-
-			// set user profile in state
-			commit('setUserProfile', userProfile);
-			
-			// change route to dashboard
-			if (router.currentRoute.path === '/') {
-				router.push('/home')
-			}
+					// Go to home if user is logged in
+					if (router.currentRoute.path === '/') {
+						router.push('/home')
+					}
+					
+				})
+				.catch(() => {
+					console.error("ERROR FETCHING USER FROM DATABASE");
+				});
 		},
 		async logout({ commit }) {
 			// log user out
@@ -65,9 +72,5 @@ export default new Vuex.Store({
 		setPubNubUUID({ commit }, uuid) {
 			commit('setPubNubUUID', uuid);
 		}
-	},
-	// getters: {
-	// 	getMyPubNubUUID: (state) => state.pubNubUUID,
-	// 	getMyUserProfile: (state) => state.userProfile
-	// }
+	}
 });

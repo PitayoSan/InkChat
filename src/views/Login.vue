@@ -25,6 +25,9 @@
 </template>
 
 <script>
+import * as fb from '../firebase';
+import router from '../router';
+
 export default {
     name: 'Login',
 	data() {
@@ -38,10 +41,17 @@ export default {
 	methods: {
 		onSubmit(evt) {
 			evt.preventDefault();
-			this.$store.dispatch('login', {
-				email: this.form.email,
-				password: this.form.password
-			});
+			// this.$store.dispatch('login', {
+			// 	email: this.form.email,
+			// 	password: this.form.password
+			// });
+            fb.auth.signInWithEmailAndPassword(this.form.email, this.form.password)
+                .then(() => {
+                    router.push('/home')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
 		}
 	}
 }
