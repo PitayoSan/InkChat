@@ -2,7 +2,7 @@
     <section class="flex-container direction-col" style="height: 100%;">
         <!-- <section class="box has-text-left is-marginless">Talking with: Charlie</section> -->
         <section id="messagesWindow" class="flex-expand-simple flex-grow-scroll">
-            <ChatBubble v-for="(m, i) of msgs" :key="i" :data="m"/>
+            <ChatBubble v-for="(m, i) of msgs" :key="i" :data="m" :isGroup="isGroup"/>
         </section>
     </section>
 </template>
@@ -15,6 +15,9 @@ export default {
     name: 'MessagesArea',
     components: {
         ChatBubble
+    },
+    props: {
+        isGroup: Boolean
     },
     data() {
         return {

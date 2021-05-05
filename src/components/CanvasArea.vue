@@ -17,7 +17,7 @@ export default {
     methods: {
         sendMessage() {
             let msg = this.$refs['ownCanvas'].getImageData();
-            this.$pnPublish({channel: 'demo', message: msg, meta: {uid: this.userProfile.uid}});
+            this.$pnPublish({channel: 'demo', message: msg, meta: {uid: this.userProfile.uid, pp: this.userProfile.pp}});
             this.$refs['ownCanvas'].clearCanvas()
         }
     },

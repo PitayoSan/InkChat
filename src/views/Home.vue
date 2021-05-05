@@ -57,10 +57,9 @@
                 />
             </div>
             <div class="column" id="bottom-mid-col" style="padding-top: 0;">
-                <MessagesArea v-if="otherUser"/>
+                <MessagesArea :isGroup="!otherUser" v-if="otherUser || chatGroup"/>
                 <section class="flex-container direction-col has-text-centered" style="height: 100%; background-color: #ede7e4; justify-content: center;">
-                    <!-- <section class="box has-text-left is-marginless">Talking with: Charlie</section> -->
-                    <p>somethings here</p>
+                    <p>chat goes here</p>
                 </section>
             </div>
             <div class="column is-one-fifth flex-container is-align-items-end" id="bottom-right-col">
@@ -90,7 +89,8 @@ export default {
     },
     data() {
         return {
-            otherUser: null
+            otherUser: null,
+            chatGroup: false
         }
     },
     computed: {
@@ -98,10 +98,17 @@ export default {
     },
     created() {
         let otherUid = this.$route.query.chatwith;
-        usersApi.getUser(otherUid).then(otherUser => {
+        if(otherUid) {
+            usersApi.getUser(otherUid).then(otherUser => {
             this.otherUser = otherUser;
             console.log(otherUser)
         })
+        }
+        
+        let chatGroup = this.$route.query.chatwithgroup;
+        if(chatGroup) {
+            this.chatGroup = true;
+        }
         
     },
     methods: {

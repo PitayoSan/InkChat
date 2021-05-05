@@ -1,8 +1,8 @@
 <template>
     <section v-if="isOther" class="flex-container padding-std">
-        <!-- <div class="image is-64x64 flex-container">
-            <img class="is-rounded" src="https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/users%2Ftest%2Fprofile.jpg?alt=media&token=014349b0-9f06-4e8b-8677-8f3660945e60"/>
-        </div> -->
+        <div class="image is-64x64 flex-container" v-if="isGroup">
+            <img class="is-rounded" :src="data.userMetadata.pp" onerror="this.src='https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Falt.png?alt=media&token=7e0feced-f0b9-45c4-92f4-8ec9df70168c'"/>
+        </div>
         <div class="padding-std bubble" style="background-color: lightblue; margin-left: 15px;">
             <img class="bubble" :src="data.message" style="max-width: 300px; max-height: 300px;"/>
         </div>
@@ -29,7 +29,11 @@ import { mapState } from 'vuex';
 export default {
     name: 'ChatBubble',
     props: {
-        data: Object
+        data: Object,
+        isGroup: Boolean
+    },
+    created() {
+        console.log(this.data.userMetadata)
     },
     computed: {
         ...mapState(['userProfile']),
