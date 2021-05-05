@@ -1,6 +1,9 @@
 <template>
     <main class="full-height flex-col">
         <Sidebar ref="sbar"/>
+        <p>{{userProfile.username}}</p>
+        <p>{{userProfile.pp}}</p>
+        <p>{{userProfile.uid}}</p>
         <nav class="columns app-title">
             <div class="column is-one-fifth flex-container has-text-centered is-align-items-center no-bot" id="upper-left-col">
                 <h1 class="title" style="color: #ff4d8e; width: 100%;">InkChat</h1>
@@ -61,7 +64,7 @@ import BoxButton from '../components/BoxButton';
 import Sidebar from '../components/Sidebar';
 import MessagesArea from '../components/MessagesArea';
 import CanvasArea from '../components/CanvasArea';
-// import IconName from '../components/IconName';
+import { mapState } from 'vuex';
 
 export default {
     name: 'Home',
@@ -76,6 +79,9 @@ export default {
         return {
         }
     },
+    computed: {
+        ...mapState(['userProfile'])
+    },
     methods: {
         trigger() {
             this.$refs.sbar.openTrue();
@@ -84,9 +90,7 @@ export default {
             this.$router.push("/friends");
         },
         info() {
-            fetch('http://127.0.0.1:5000').then(res => res.text()).then(data => {
-                alert(data);
-            })
+            console.log("CLicked groups...")
         }
     }
 }
