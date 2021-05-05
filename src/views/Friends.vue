@@ -6,11 +6,11 @@
                     <div class="media flex-container">
                         <div class="media-left v-align">
                             <figure class="image is-48x48">
-                            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                            <img :src="userFriends.friends[friend]['pp']" alt="Placeholder image">
                             </figure>
                         </div>
                         <div class="media-content v-align">
-                            <p class="title is-4">{{getUser(friend)}}</p>
+                            <p class="title is-4">{{userFriends.friends[friend]['username']}}</p>
                         </div>
                         </div>
 

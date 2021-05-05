@@ -21,6 +21,15 @@
                     style="width:100%;"
                     v-if="otherUser"
                     />
+                    <!-- <BoxButton
+                    :text="groupName"
+                    :border="true"
+                    :round="true"
+                    :displayOnly="true"
+                    style="width:100%;"
+                    :imgsrc="''"
+                    v-if="chatGroup"
+                    /> -->
                     <BoxButton
                     text="Welcome to InkChat!"
                     :border="true"
@@ -30,6 +39,7 @@
                     :imgsrc="''"
                     v-else
                     />
+                    
 
                 <!-- </section> -->
             </div>
@@ -94,7 +104,10 @@ export default {
         }
     },
     computed: {
-        ...mapState(['userProfile'])
+        ...mapState(['userProfile']),
+        /*groupName: function(){
+            return this.$route.query.chatwithgroup;
+        }*/
     },
     created() {
         let otherUid = this.$route.query.chatwith;

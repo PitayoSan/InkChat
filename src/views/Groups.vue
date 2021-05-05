@@ -56,7 +56,7 @@ export default {
                 },
                 {
                     name: "Tianguis Tec",
-                    description: "Aquí se vende todo menos drogas (tal vez)",
+                    description: "Aquí se vende todo (tal vez)",
                     icon: "https://bulma.io/images/placeholders/96x96.png",
                 }
             ]
