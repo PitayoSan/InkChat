@@ -56,8 +56,8 @@ export default {
     methods: {
         async validateForm() {
             console.log(this.username, this.email, this.password, this.cPassword);
-            let b64 = await this.getBase64Image(this.pp);
-            this.profilePic = b64;
+            //let b64 = await this.getBase64Image(this.pp);
+            //this.profilePic = b64;
             this.registerUser();
         },
         registerUser() {

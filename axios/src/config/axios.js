@@ -25,7 +25,7 @@ const myAxios = axios.create({
 // Response interceptor
 myAxios.interceptors.response.use(
     response => {
-        return response.data;
+        return response.data.data;
     },
     async error => {
 

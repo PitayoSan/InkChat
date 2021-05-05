@@ -50,6 +50,12 @@ Vue.use(PubNubVue, {
 	ssl: true
 }, store)
 
+// new Vue({
+// 	router,
+// 	store,
+// 	render: h => h(App)
+// }).$mount('#app')
+
 let app;
 auth.onAuthStateChanged(user => {
 	if(!app) {
@@ -61,6 +67,7 @@ auth.onAuthStateChanged(user => {
 	}
 
 	if(user) {
+		console.log("fetching from main")
 		store.dispatch('fetchUserProfile', user)
 	}
 });
