@@ -20,7 +20,10 @@
                     <b-button tag="a"
                         href="/pwd-change">
                         Change password
-                    </b-button>    
+                    </b-button>
+                    <b-button @click="logout">
+                        Logout
+                    </b-button>   
                 </div>
                 <hr style="border: 0.5px solid; margin-right: 20px; margin-left: 20px;">
                 <div class="p-1 flex-center">
@@ -64,6 +67,9 @@ export default {
   methods: {
       openTrue() {
           this.open = true;
+      },
+      logout() {
+          this.$store.dispatch('logout');
       }
   }
 }
