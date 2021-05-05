@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import * as fb from '../firebase';
 import router from '../router';
+import api from '../../axios/src/api';
 
 Vue.use(Vuex);
 
@@ -31,16 +32,25 @@ export default new Vuex.Store({
 			dispatch('fetchUserProfile', user);
 		},
 		async fetchUserProfile({ commit }, user) {
-			// fetch user profile
-			const userProfile = user; // TODO: get user from db
+			// Using firebase uid, fetch all user data from db.
+			api.usersApi.getUser(user.uid)
+				.then(dbUser => {
+					user.db = dbUser;
+					// Commit user profile in state
+					commit('setUserProfile', user);
+					// Go to home if user is logged in
+					if (router.currentRoute.path === '/') {
+						router.push('/home')
+					}
+					
+				})
+				.catch(() => {
+					console.error("ERROR FETCHING USER FROM DATABASE");
+				})
 
-			// set user profile in state
-			commit('setUserProfile', userProfile);
+				
 			
-			// change route to dashboard
-			if (router.currentRoute.path === '/') {
-				router.push('/home')
-			}
+			
 		},
 		async logout({ commit }) {
 			// log user out
@@ -66,8 +76,9 @@ export default new Vuex.Store({
 			commit('setPubNubUUID', uuid);
 		}
 	},
-	// getters: {
-	// 	getMyPubNubUUID: (state) => state.pubNubUUID,
-	// 	getMyUserProfile: (state) => state.userProfile
-	// }
+	getters: {
+		getDbUserInfo: (state) => {
+			return state.userProfile.db;
+		}
+	}
 });

@@ -14,11 +14,20 @@ import './global.css'
 // FontAwesome imports
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faTint, faUser, faUserCheck, faUserTimes, faCircle, faTrash  } from '@fortawesome/free-solid-svg-icons'
+import { faTint, faUser, faUserCheck, faUserTimes, faCircle, faTrash, faUpload, faExclamationCircle  } from '@fortawesome/free-solid-svg-icons'
 
 Vue.config.productionTip = false
 
-library.add(faTint, faUser, faUserCheck, faUserTimes, faCircle, faTrash)
+library.add(
+			faTint, 
+			faUser, 
+			faUserCheck, 
+			faUserTimes, 
+			faCircle, 
+			faTrash, 
+			faUpload,
+			faExclamationCircle
+		)
 Vue.component('vue-fontawesome', FontAwesomeIcon);
 
 // Buefy Config
