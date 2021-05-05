@@ -38,21 +38,20 @@ export default {
     name: "Groups",
     data() {
         return { 
-            /*
-            groups: [
+            userGroups: [
                 {
                     name: "Hentai Simulator 7",
                     description: "Proyecto de Ken",
                     icon: "https://bulma.io/images/placeholders/96x96.png",
                 },
                 {
-                    name: "ISC en Drogas",
-                    description: "Aquí no se venden drogas",
+                    name: "ISC en Lonjas",
+                    description: "Grupo principal de ISC",
                     icon: "https://bulma.io/images/placeholders/96x96.png",
                 },
                 {
                     name: "La Banda Gangrena",
-                    description: "Aquí sí se venden drogas",
+                    description: "Grupo de compra y venta",
                     icon: "https://bulma.io/images/placeholders/96x96.png",
                 },
                 {
@@ -61,7 +60,6 @@ export default {
                     icon: "https://bulma.io/images/placeholders/96x96.png",
                 }
             ]
-            */
         }
     },
     
