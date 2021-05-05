@@ -1,6 +1,6 @@
 <template>
     <div class="columns is-multiline">
-        <div class="column is-4" v-for="friend of userFriends" :key="friend.usernames">
+        <div class="column is-4" v-for="friend of Object.keys(userFriends.friends)" :key="friend.usernames">
             <div class="card">
                 <div class="card-content">
                     <div class="media flex-container">
@@ -10,16 +10,16 @@
                             </figure>
                         </div>
                         <div class="media-content v-align">
-                            <p class="title is-4">{{friend.username}}</p>
+                            <p class="title is-4">{{getUser(friend)}}</p>
                         </div>
                         </div>
 
                         <div class="columns">
                             <div class="column is-6">
-                                <b-button expanded type="is-info is-light">Chatear</b-button>    
+                                <b-button expanded type="is-info is-light" @click="toChat(friend)">Chatear</b-button>    
                             </div>
                             <div class="column is-6">
-                                <b-button expanded type="is-danger is-light">Eliminar</b-button>
+                                <b-button expanded type="is-danger is-light" @click="deleteFriend(friend)">Eliminar</b-button>
                             </div>
                             
                         </div>
@@ -32,8 +32,9 @@
 
 <script>
 //import { friendsApi } from '../../axios/src/api';
-//import friendsApi from '../../axios/src/Friends';
+import friendsApi from '../../axios/src/Friends';
 import {mapState} from 'vuex';
+import userApi from '../../axios/src/Users';
 
 export default {
     name: "Friends",
@@ -70,6 +71,18 @@ export default {
 
     created: function(){
         this.$store.dispatch('getUserFriends');
+    },
+
+    methods: {
+        toChat(id){
+            this.$router.push(`/home?chatwith=${id}`);
+        },
+        async getUser(id){
+            return await userApi.getUser(id);
+        },
+        deleteFriend(id){
+            friendsApi.deleteFriend(id);
+        }
     }
 }
 </script>

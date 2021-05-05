@@ -17,10 +17,10 @@
 
                         <div class="columns">
                             <div class="column is-6">
-                                <b-button expanded type="is-info is-light">Chatear</b-button>    
+                                <b-button expanded type="is-info is-light" @click="toGroupChat(group.name)">Chatear</b-button>    
                             </div>
                             <div class="column is-6">
-                                <b-button expanded type="is-danger is-light">Abandonar</b-button>
+                                <b-button expanded type="is-danger is-light" @click="exitGroup(group.name)">Abandonar</b-button>
                             </div>
                             
                         </div>
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-//import groupsApi from '../../axios/src/Groups';
+import groupsApi from '../../axios/src/Groups';
 import { mapState } from 'vuex';
 
 export default {
@@ -69,6 +69,15 @@ export default {
 
     created: function(){
         this.$store.dispatch('getUserGroups');
+    },
+
+    methods: {
+        toGroupChat(id){
+            this.$router.push(`/home?chatwithgroup=${id}`);
+        },
+        exitGroup(id){
+            groupsApi.exitGroup(id);
+        }
     }
     /*
     function(){
