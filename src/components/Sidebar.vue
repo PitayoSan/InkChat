@@ -11,7 +11,9 @@
             >
                 <div class="p-1 flex-center top-element">
                     <div class="container">
-                        <img :src=userProfile.pp>
+                        <img :src=userProfile.pp
+                            onerror="this.src='https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Falt.png?alt=media&token=7e0feced-f0b9-45c4-92f4-8ec9df70168c'"
+                        >
                     </div>
                     <div>
                         <b-icon icon="user"></b-icon>
