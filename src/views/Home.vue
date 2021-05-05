@@ -13,13 +13,24 @@
 
                     }"/> -->
                     <BoxButton
-                    text="Vitor" 
-                    imgsrc="https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/users%2Ftest%2Fanother.png?alt=media&token=3e70d9aa-aedb-4648-9e2c-1afac8524f71" 
+                    :text="otherUser.username" 
+                    :imgsrc="otherUser.pp" 
                     :border="true"
                     :round="true"
                     :displayOnly="true"
                     style="width:100%;"
+                    v-if="otherUser"
                     />
+                    <BoxButton
+                    text="Welcome to InkChat!"
+                    :border="true"
+                    :round="true"
+                    :displayOnly="true"
+                    style="width:100%;"
+                    :imgsrc="''"
+                    v-else
+                    />
+
                 <!-- </section> -->
             </div>
             <div class="column is-one-fifth no-bot" id="upper-right-col">
@@ -46,7 +57,11 @@
                 />
             </div>
             <div class="column" id="bottom-mid-col" style="padding-top: 0;">
-                <MessagesArea />
+                <MessagesArea v-if="otherUser"/>
+                <section class="flex-container direction-col has-text-centered" style="height: 100%; background-color: #ede7e4; justify-content: center;">
+                    <!-- <section class="box has-text-left is-marginless">Talking with: Charlie</section> -->
+                    <p>somethings here</p>
+                </section>
             </div>
             <div class="column is-one-fifth flex-container is-align-items-end" id="bottom-right-col">
                 <CanvasArea />
@@ -62,6 +77,7 @@ import Sidebar from '../components/Sidebar';
 import MessagesArea from '../components/MessagesArea';
 import CanvasArea from '../components/CanvasArea';
 import { mapState } from 'vuex';
+import usersApi from '../../axios/src/Users';
 
 export default {
     name: 'Home',
@@ -74,10 +90,19 @@ export default {
     },
     data() {
         return {
+            otherUser: null
         }
     },
     computed: {
         ...mapState(['userProfile'])
+    },
+    created() {
+        let otherUid = this.$route.query.chatwith;
+        usersApi.getUser(otherUid).then(otherUser => {
+            this.otherUser = otherUser;
+            console.log(otherUser)
+        })
+        
     },
     methods: {
         trigger() {
