@@ -19,15 +19,15 @@
                         <b-icon icon="user"></b-icon>
                         {{userProfile.username}}
                     </div>
-                    <b-button tag="a"
-                        href="/pwd-change">
+                    <b-button tag="a" type="is-text"
+                        href="/pwd-change" style="margin-top: 12px;">
                         Change password
                     </b-button>
-                    <b-button @click="logout">
+                    <b-button @click="logout" type="is-text">
                         Logout
                     </b-button>   
                 </div>
-                <hr style="border: 0.5px solid; margin-right: 20px; margin-left: 20px;">
+                <hr style="border: 0.5px solid #dedede; margin-right: 20px; margin-left: 20px;">
                 <div class="p-1 flex-center">
                     <b>Pending friend requests</b>
                     <FriendRequest fname="🅱iguel" imgsrc='octoling.jpg'/>
@@ -124,6 +124,9 @@ export default {
         width: 100%;
         display: flex;
         flex-direction: column;
+    }
+    .options {
+        font-size: small;
     }
 
 </style>
