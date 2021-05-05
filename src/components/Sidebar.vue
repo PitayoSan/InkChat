@@ -11,18 +11,23 @@
             >
                 <div class="p-1 flex-center top-element">
                     <div class="container">
-                        <img src='../assets/images/misato.jpg'>
+                        <img :src=userProfile.pp
+                            onerror="this.src='https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Falt.png?alt=media&token=7e0feced-f0b9-45c4-92f4-8ec9df70168c'"
+                        >
                     </div>
                     <div>
                         <b-icon icon="user"></b-icon>
-                        {{username}}
+                        {{userProfile.username}}
                     </div>
-                    <b-button tag="a"
-                        href="/pwd-change">
+                    <b-button tag="a" type="is-text"
+                        href="/pwd-change" style="margin-top: 12px;">
                         Change password
-                    </b-button>    
+                    </b-button>
+                    <b-button @click="logout" type="is-text">
+                        Logout
+                    </b-button>   
                 </div>
-                <hr style="border: 0.5px solid; margin-right: 20px; margin-left: 20px;">
+                <hr style="border: 0.5px solid #dedede; margin-right: 20px; margin-left: 20px;">
                 <div class="p-1 flex-center">
                     <b>Pending friend requests</b>
                     <FriendRequest fname="🅱iguel" imgsrc='octoling.jpg'/>
@@ -46,6 +51,7 @@
 
 <script>
 import FriendRequest from './FriendRequest.vue';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Sidebar',
@@ -54,13 +60,18 @@ export default {
   },
   data() {
     return {
-      open: false,
-      username: 'Charli'
+      open: false
     }
+  },
+  computed: {
+      ...mapState(['userProfile'])
   },
   methods: {
       openTrue() {
           this.open = true;
+      },
+      logout() {
+          this.$store.dispatch('logout');
       }
   }
 }
@@ -113,6 +124,9 @@ export default {
         width: 100%;
         display: flex;
         flex-direction: column;
+    }
+    .options {
+        font-size: small;
     }
 
 </style>

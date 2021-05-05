@@ -1,9 +1,6 @@
 <template>
     <main class="full-height flex-col">
         <Sidebar ref="sbar"/>
-        <p>{{userProfile.username}}</p>
-        <p>{{userProfile.pp}}</p>
-        <p>{{userProfile.uid}}</p>
         <nav class="columns app-title">
             <div class="column is-one-fifth flex-container has-text-centered is-align-items-center no-bot" id="upper-left-col">
                 <h1 class="title" style="color: #ff4d8e; width: 100%;">InkChat</h1>
@@ -28,8 +25,8 @@
             <div class="column is-one-fifth no-bot" id="upper-right-col">
                 <BoxButton 
                 @click.native="trigger" 
-                text="Charli" 
-                imgsrc="https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/users%2Ftest%2Fprofile.jpg?alt=media&token=014349b0-9f06-4e8b-8677-8f3660945e60" 
+                :text="userProfile.username" 
+                :imgsrc="userProfile.pp" 
                 :border="false"
                 :round="true"
                 style="width:100%;"
