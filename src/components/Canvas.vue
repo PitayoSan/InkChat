@@ -54,22 +54,22 @@ export default {
               {
                 name: 'Red',
                 class: 'color-red',
-                hex: '#eb3434'
+                hex: '#ff0000'
               },
               {
                 name: 'Blue',
                 class: 'color-blue',
-                hex: '#578dde'
+                hex: '#0000ff'
               },
               {
                 name: 'Green',
                 class: 'color-green',
-                hex: '#53ed81'
+                hex: '#00ff7f'
               },
               {
                 name: 'Orange',
                 class: 'color-orange',
-                hex: '#ffcc6e'
+                hex: '#FFA500'
               }
           ],
           brushWidth: null
