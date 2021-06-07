@@ -1,7 +1,7 @@
 <template>
     <section class="flex-container direction-col" style="height: 100%;">
         <!-- <section class="box has-text-left is-marginless">Talking with: Charlie</section> -->
-        <section id="messagesWindow" class="flex-expand-simple flex-grow-scroll" style="overflow-y:scroll;">
+        <section  id="messagesWindow" class="flex-expand-simple flex-grow-scroll" style="overflow-y:scroll;">
             <ChatBubble v-for="(m, i) of msgs" :key="i" :data="m" :isGroup="isGroup"/>
         </section>
     </section>
