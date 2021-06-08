@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { auth } from '../../../src/firebase';
 
 const apiOrigin = "http://localhost:5000/";
 
@@ -7,20 +8,21 @@ const myAxios = axios.create({
 });
 
 // Request interceptor (attach authorization header)
-// myAxios.interceptors.request.use(
-//     async config => {
-//         const token = await firebase.auth.currentUser.getIdToken();
-//         config.headers = {
-//             'Authorization': `Bearer ${token}`,
-//             'Accept': 'application/json',
-//             'Content-Type': 'application/json'
-//         }
-//         return config;
-//     },
-//     () => {
-//         throw {message: "Error making request to server."};
-//     }
-// );
+myAxios.interceptors.request.use(
+    async config => {
+        const token = await auth.currentUser.getIdToken();
+        console.log(token);
+        config.headers = {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+        return config;
+    },
+    () => {
+        throw {message: "Error making request to server."};
+    }
+);
 
 // Response interceptor
 myAxios.interceptors.response.use(
