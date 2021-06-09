@@ -6,5 +6,7 @@ export default {
     getUser: (uid) => 
         myAxios.get(`/users?uid=${uid}`),
     getUserUID: (username) =>
-        myAxios.get(`/users/uid?username=${username}`)
+        myAxios.get(`/users/uid?username=${username}`),
+    updateUserPP: (uid, encoded_pp) =>
+        myAxios.post(`/users/pp`, {uid, encoded_pp})
 }
