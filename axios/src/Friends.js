@@ -1,16 +1,19 @@
 import axios from "./config/axios";
-//import axios from myAxios;
 
 export default {
 	getFriends: (id) => {
 		return axios.get(`/friends?uid=${id}`);
 	},
 
-	getFriend: (id) => {
-		return axios.get(`/friends/${id}`);
+	sendFR: (sender, dest) => {
+		return axios.post(`/friends`, {sender, dest});
 	},
 
-	deleteFriend: (id) => {
-		return axios.delete(`/friends/${id}`);
-	}
+	acceptFR: (sender, dest) => {
+		return axios.put(`/friends`, {sender, dest});
+	},
+
+	deleteFriend: (uid, friend) => {
+		return axios.delete(`/friends?uid=${uid}&friend=${friend}`);
+	},
 }

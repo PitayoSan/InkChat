@@ -2,25 +2,55 @@
     <div class="outer">
         <div style="height: 100%; width: 30%;">
             <div class="container">
-                <img :src="require('../assets/images/' + this.imgsrc)" />
+                <img :src="defaultIcon"/>
             </div>
         </div >
         <div>
             {{fname}}
         </div>
         <div style="width: 64px; display:flex; justify-content: space-between;">
-            <b-button size="is-small" icon-left="user-check" type="is-success"></b-button>
-            <b-button size="is-small" icon-left="user-times" type="is-danger"></b-button>
+            <b-button @click="acceptFR" size="is-small" icon-left="user-check" type="is-success"></b-button>
+            <b-button @click="declineFR" size="is-small" icon-left="user-times" type="is-danger"></b-button>
         </div>
     </div>
 </template>
 
 <script>
+import friendsApi from '../../axios/src/Friends';
+
 export default {
     name: 'FriendRequest',
     props: {
+        uuid: String,
         fname: String,
-        imgsrc: String,
+        fuid: String,
+        src: String,
+    },
+    computed: {
+        defaultIcon () {
+            if(this.src === '') return "https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Falt.png?alt=media&token=7e0feced-f0b9-45c4-92f4-8ec9df70168c";
+            return this.src;
+        }
+    },
+    methods: {
+        acceptFR() {
+            console.log(this.uuid)
+            console.log(this.fuid)
+            friendsApi.acceptFR(this.fuid, this.uuid).then(() => {
+                this.$buefy.dialog.alert("Friend request successfully accepted!! UwU");
+            })
+            .catch(() => {
+                this.$buefy.dialog.alert("Invalid user or friend request owo");
+            });
+        },
+        declineFR() {
+            friendsApi.deleteFriend(this.uuid, this.fuid).then(() => {
+                this.$buefy.dialog.alert("Friend request successfully declined unu");
+            })
+            .catch(() => {
+                this.$buefy.dialog.alert("Invalid user or friend request owo");
+            });
+        }
     }
 }
 </script>
