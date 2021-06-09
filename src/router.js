@@ -5,8 +5,6 @@ import Register from './views/Register';
 import VueRouter from 'vue-router';
 import Studio from './views/Studio';
 import Test from './views/Test';
-import Friends from './views/Friends';
-import Groups from './views/Groups';
 import Layout from './views/Layout';
 import { userIsSignedIn } from './firebase';
 import store from './store/index';
@@ -18,8 +16,6 @@ const routes = [
     { path: '/forgot', component: Forgot, meta: {requiresAuth: false}},
     { path: '/studio', component: Studio, meta: {requiresAuth: false}},
     { path: '/test', component: Test, meta: {requiresAuth: false}},
-    { path: '/friends', component: Friends, meta: {requiresAuth: true}},
-    { path: '/groups', component: Groups, meta: {requiresAuth: true}},
     { path: '/layout', component: Layout, meta: {requiresAuth: false}},
 ]
 

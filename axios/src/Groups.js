@@ -9,6 +9,10 @@ export default {
 		return axios.get(`/groups?name=${id}`);
 	},
 
+	createGroup: (name) => {
+		return axios.post(`/groups`, {name});
+	},
+
 	sendMessage: (name, msg, uid, username, time) => {
 		return axios.put(`/groups`, {name, msg, uid, username, time});
 	}

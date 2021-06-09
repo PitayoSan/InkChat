@@ -1,12 +1,15 @@
 <template>
     <section style="height: 178px; overflow-x:hidden" class="flex-expand-simple flex-grow-scroll">
         <div v-if="theList.length > 0" style="height: 100%;">
-            <div @click="setChat(q)" class="box flex-container cont app-border thin" v-for="q in theList" :key="q.name" style="margin: 0;">
+            <div @click="setChat(q)" class="box flex-container cont app-border thin" v-for="q in theList" :key="q.name" style="margin: 0;display: flex;">
                 <div class="round-img v-align">
                     <img class="is-rounded" :src="q.icon" onerror="this.src='https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Falt.png?alt=media&token=7e0feced-f0b9-45c4-92f4-8ec9df70168c'">
                 </div>
                 <div class="name v-align">
                     {{q.name}}
+                </div>
+                <div class="v-align" style="display: flex;align-items: flex-end;flex-grow: 1">
+                    <b-icon @click.native="removeFriend(q.chatId)"  class="clickable" pack="fas" icon="trash" size="is-large"></b-icon>
                 </div>
             </div>
         </div>
@@ -35,6 +38,18 @@ export default {
         },
         setChat(recipient) {
             this.$emit('selected', recipient);
+        },
+        removeFriend(frienduid) {
+            friends.deleteFriend(this.userProfile.uid, frienduid)
+            .then(() => {
+                this.$buefy.dialog.alert({
+                    message: "Fwend removed unu",
+                    onConfirm: () => location.reload()
+                });
+            })
+            .catch(() => {
+                this.$buefy.dialog.alert("Fwend could not be removed owo");
+            });
         }
     },
     created() {

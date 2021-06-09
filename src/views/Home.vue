@@ -44,9 +44,6 @@
                         <div class="flex-expand-simple v-align">
                             <b>Friends</b>
                         </div>
-                        <div class="v-align">
-                            <b-icon @click.native="toggleModalFriends"  class="clickable" pack="fas" icon="cog" size="is-large"></b-icon>
-                        </div>
                     </div>
                     <FChatList ref="fChatList" @selected="setChat"/>
                 </div>
@@ -55,11 +52,16 @@
                         <div class="flex-expand-simple v-align">
                             <b>Groups</b>
                         </div>
-                        <div class="v-align">
-                            <b-icon @click.native="toGroups"  class="clickable" pack="fas" icon="cog" size="is-large"></b-icon>
-                        </div>
                     </div>
                     <GChatList ref="gChatList" @selected="setChat"/>
+                </div>
+                <div class="bottom">
+                    <b-input v-model="newGroup" placeholder="Group name" size="is-small" required></b-input>
+                    <b-button @click="createGroup" tag="a"
+                        size="is-large"
+                        type="is-info is-light">
+                        Create group
+                    </b-button>
                 </div>
             </div>
             <div class="column" id="bottom-mid-col" style="padding-top: 0;">
@@ -87,6 +89,7 @@ import CanvasArea from '../components/CanvasArea';
 import { mapState } from 'vuex';
 import FChatList from '../components/FChatList';
 import GChatList from '../components/GChatList';
+import groups from '../../axios/src/Groups';
 import FriendSettings from '../components/FriendSettings';
 
 export default {
@@ -103,7 +106,8 @@ export default {
     data() {
         return {
             currentRecipient: null,
-            friendsModalOpen: false
+            friendsModalOpen: false,
+            newGroup: null
         }
     },
     computed: {
@@ -125,6 +129,18 @@ export default {
         },
         toggleModalFriends() {
             this.$refs.friendModal.toggleOpen()
+        },
+        createGroup() {
+            groups.createGroup(this.newGroup)
+            .then(() => {
+                this.$buefy.dialog.alert({
+                    message: "Woup successfully cweated uwu",
+                    onConfirm: () => location.reload()
+                });
+            })
+            .catch(() => {
+                this.$buefy.dialog.alert("Woup could not be created owo");
+            });
         }
     }
 }
