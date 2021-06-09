@@ -33,10 +33,9 @@ export default {
         isGroup: Boolean
     },
     created() {
-        console.log(this.data.userMetadata)
+        console.log("is group?", this.isGroup)
     },
     mounted() {
-        console.log(typeof this.$refs.xdxd)
         this.$refs.bubbleImg.onload = function() {
             var msgsWin = document.getElementById("messagesWindow");
             msgsWin.scrollTop = 100000;
@@ -53,8 +52,8 @@ export default {
             return formatted;
         },
         isOther() {
-            console.log("my uid: ", this.userProfile.uid)
-            console.log("other uid: ", this.data.userMetadata.uid)
+            // console.log("my uid: ", this.userProfile.uid)
+            // console.log("other uid: ", this.data.userMetadata.uid)
             return this.data.userMetadata.uid !== this.userProfile.uid;
         }
     }

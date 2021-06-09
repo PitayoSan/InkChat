@@ -1,8 +1,8 @@
 import axios from "./config/axios";
 
 export default {
-	getGroups: (id) => {
-		return axios.get(`/groups/${id}`);
+	getGroups: () => {
+		return axios.get(`/groups/all`);
 	},
 
 	getGroup: (id) => {

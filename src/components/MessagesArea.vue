@@ -1,8 +1,9 @@
 <template>
     <section class="flex-container direction-col" style="height: 100%;">
         <!-- <section class="box has-text-left is-marginless">Talking with: Charlie</section> -->
+        <!-- <p>{{chatSettings}}</p> -->
         <section  id="messagesWindow" class="flex-expand-simple flex-grow-scroll" style="overflow-y:scroll;">
-            <ChatBubble v-for="(m, i) of msgs" :key="i" :data="m" :isGroup="true"/>
+            <ChatBubble v-for="(m, i) of msgs" :key="i" :data="m" :isGroup="chatSettings.isGroup"/>
         </section>
     </section>
 </template>
@@ -17,11 +18,23 @@ export default {
     },
     props: {
         chatSettings: Object
+        /*
+            {
+                name: '', 
+                icon: '',
+                isGroup: boolean,
+                chatId: '',
+                channel: ''
+            }
+        */
     },
     data() {
         return {
-            msgs: this.$pnGetMessage(this.chatSettings.channel, this.received)
+            msgs: this.$pnGetMessage(this.chatSettings.channel)
         }
+    },
+    created() {
+        console.log("init: messages area!")
     },
     methods: {
         received(msg) {
@@ -29,6 +42,7 @@ export default {
         }
     },
     mounted() {
+        console.log("mounted again??")
         this.$pnSubscribe({channels: [this.chatSettings.channel],  withPresence: true });
     }
 }

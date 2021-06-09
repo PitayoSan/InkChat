@@ -16,12 +16,12 @@
 }
 
 .box-button:hover {
-    background-color:skyblue;
+    background-color:#ede7e4;
     cursor: pointer;
 }
 
 .box-button:active {
-    background-color:steelblue;
+    background-color:#faf5f2;
 }
 .text {
     padding-left: 20px;

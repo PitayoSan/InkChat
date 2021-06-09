@@ -3,20 +3,20 @@
         <Sidebar ref="sbar"/>
         <nav class="columns app-title">
             <div class="column is-one-fifth flex-container has-text-centered is-align-items-center no-bot" id="upper-left-col">
-                <h1 class="title" style="color: #ff4d8e; width: 100%;">InkChat</h1>
+                <h1 class="title" style="color: #ff4d8e; width: 100%;">inkchat</h1>
             </div>
             <div class="column flex-container is-align-items-end flex-container is-align-items-end no-bot" id="upper-mid-col" >
                 <BoxButton
-                :text="chatSettings.username" 
-                :imgsrc="chatSettings.pp" 
+                :text="currentRecipient.name" 
+                :imgsrc="currentRecipient.icon" 
                 :border="true"
                 :round="true"
                 :displayOnly="true"
                 style="width:100%;"
-                v-if="chatSettings"
+                v-if="currentRecipient"
                 />
                 <BoxButton
-                text="Welcome to InkChat!"
+                text="Welcome to InkChat! Choose a friend or group to start chatting!"
                 :border="true"
                 :round="true"
                 :displayOnly="true"
@@ -38,7 +38,7 @@
         </nav>
         <section class="columns flex-expand-simple">
             <div class="column is-one-fifth" id="bottom-left-col">
-                <BoxButton text="Grupos" :border="true" :round="true"
+                <!-- <BoxButton text="Grupos" :border="true" :round="true"
                 @click.native = "toGroups"
                 imgsrc="https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Fusers-solid.svg?alt=media&token=0b0313a3-5515-40b8-b5a5-99909086a20c"
                 />
@@ -46,15 +46,21 @@
                 <BoxButton text="Amigos" :border="true" :round="false"
                 @click.native = "toFriends"
                 imgsrc="https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Fheart-solid.svg?alt=media&token=e7f54740-6e0b-4406-801f-b93e9ff4e79c"
-                />
+                /> -->
+                <ChatList @selected="setChat"/>
             </div>
             <div class="column" id="bottom-mid-col" style="padding-top: 0;">
                 <!-- <MessagesArea v-if="otherUser" type="private" :chatWith="otherUser.uid"/> -->
-                <MessagesArea v-if="chatSettings" :chatSettings="chatSettings"/>
+                <MessagesArea v-if="currentRecipient" :chatSettings="currentRecipient" :key="currentRecipient.chatId"/>
+                <section v-else class="flex-container direction-col has-text-centered" style="height: 100%; background-color: #ede7e4; justify-content: center; align-items:center;">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Fwatermark_gray.png?alt=media&token=7d286ecd-c041-44d6-b4a9-07f55975c5af"
+                        style="width: 500px; height: auto;"
+                    >
+                </section>
                 
             </div>
             <div class="column is-one-fifth flex-container is-align-items-end" id="bottom-right-col">
-                <CanvasArea v-if="chatSettings" :chatSettings="chatSettings"/>
+                <CanvasArea v-if="currentRecipient" :chatSettings="currentRecipient" :key="currentRecipient.chatId"/>
             </div>
         </section>
     </main>
@@ -67,7 +73,7 @@ import Sidebar from '../components/Sidebar';
 import MessagesArea from '../components/MessagesArea';
 import CanvasArea from '../components/CanvasArea';
 import { mapState } from 'vuex';
-// import usersApi from '../../axios/src/Users';
+import ChatList from '../components/ChatList';
 
 export default {
     name: 'Home',
@@ -76,26 +82,15 @@ export default {
         Sidebar,
         MessagesArea,
         CanvasArea,
-        // IconName
+        ChatList
     },
     data() {
         return {
-            chatSettings: null
+            currentRecipient: null
         }
     },
     computed: {
-        ...mapState(['userProfile']),
-        /*groupName: function(){
-            return this.$route.query.chatwithgroup;
-        }*/
-    },
-    created() {
-        console.log("PROFILE: ", this.userProfile);
-        let chatwith = this.$route.query.chatwith; //contains uid/group name to connect with
-        
-        if(this.uidIsValid(chatwith))
-            this.chatSettings = this.userProfile.friends[chatwith]
-
+        ...mapState(['userProfile'])
     },
     methods: {
         trigger() {
@@ -107,19 +102,9 @@ export default {
         toGroups(){
             this.$router.push("/groups");
         },
-        uidIsValid(uid) {
-            if(!uid)
-                return false;
-            
-            const friends = Object.keys(this.userProfile.friends);
-            for(let fuid of friends) {
-                if(fuid === uid) {
-                    return true;
-                }
-            }
-
-            // TODO filter through groups
-
+        setChat(recipient) {
+            console.log("recipient is: ", recipient)
+            this.currentRecipient = recipient;
         }
     }
 }
