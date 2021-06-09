@@ -45,7 +45,9 @@ export default {
         theList() {
             let theFriends = [];
             if(this.myFriends) {
-                theFriends = Object.keys(this.myFriends).map(key => (
+                theFriends = Object.keys(this.myFriends)
+                .filter(key => this.myFriends[key].is_friends)
+                .map(key => (
                     {
                         name: this.myFriends[key].username, // e.g. Charlie
                         icon: this.myFriends[key].pp,
