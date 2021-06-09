@@ -8,7 +8,7 @@
 <script>
 import Canvas from './Canvas';
 import { mapState } from 'vuex';
-// import { auth } from '../firebase';
+import groupsApi from '../../axios/src/Groups';
 
 export default {
     name: 'CanvasArea',
@@ -20,10 +20,27 @@ export default {
     },
     methods: {
         sendMessage() {
-            let msg = this.$refs['ownCanvas'].getImageData();
-            this.$pnPublish({channel: this.chatSettings.channel, message: msg, meta: {uid: this.userProfile.uid, pp: this.userProfile.pp}});
-            // this.$pnPublish({channel: `ch_${auth.currentUser.uid}`, message: msg, meta: {uid: this.userProfile.uid, pp: this.userProfile.pp}});
+            let msg = {}
+            msg['msg'] = this.$refs['ownCanvas'].getImageData();
+            this.$pnPublish({channel: this.chatSettings.channel, message: msg.msg, meta: {uid: this.userProfile.uid, pp: this.userProfile.pp}});
+            msg['name'] = this.chatSettings.channel;
+            msg['uid'] = this.userProfile.uid;
+            msg['username'] = this.userProfile.username;
+            let date = new Date();
+            let minutes = date.getMinutes();
+            if (minutes < 10) {
+                msg['time'] = date.getHours() + ':0' + minutes;
+            } else {
+                msg['time'] = date.getHours() + ':' + minutes;
+            }
+            this.backupMessage(msg);
             this.$refs['ownCanvas'].clearCanvas()
+        },
+        backupMessage(msg) {
+            groupsApi.sendMessage(msg.name, msg.msg, msg.uid, msg.username, msg.time)
+            .catch(() => {
+                console.log("Message could not be saved to database unu");
+            });
         }
     },
     computed: {

@@ -1,45 +1,41 @@
 <template>
     <section class="flex-container direction-col" style="height: 100%;">
-        <!-- <section class="box has-text-left is-marginless">Talking with: Charlie</section> -->
-        <!-- <p>{{chatSettings}}</p> -->
         <section  id="messagesWindow" class="flex-expand-simple flex-grow-scroll" style="overflow-y:scroll;">
+            <!--<ChatBubbleBack v-for="(m, i) of this.group.msg" :key="`cb_${i}`" :data="m" :isGroup="chatSettings.isGroup"/>-->
             <ChatBubble v-for="(m, i) of msgs" :key="i" :data="m" :isGroup="chatSettings.isGroup"/>
         </section>
     </section>
 </template>
 
 <script>
+import groups from '../../axios/src/Groups';
 import ChatBubble from './ChatBubble';
+//import ChatBubbleBack from './ChatBubbleBack';
 
 export default {
     name: 'MessagesArea',
     components: {
-        ChatBubble
+        ChatBubble,
+        //ChatBubbleBack
     },
     props: {
         chatSettings: Object
-        /*
-            {
-                name: '', 
-                icon: '',
-                isGroup: boolean,
-                chatId: '',
-                channel: ''
-            }
-        */
     },
     data() {
         return {
-            msgs: this.$pnGetMessage(this.chatSettings.channel)
+            msgs: this.$pnGetMessage(this.chatSettings.channel),
+            group: null
         }
     },
-    created() {
-        console.log("init: messages area!")
+    async created() {
+        console.log("init: messages area!");
+        this.group = await groups.getGroup(this.chatSettings.channel);
+
     },
     methods: {
         received(msg) {
             console.log("received msg: ", msg)
-        }
+        },
     },
     mounted() {
         console.log("mounted again??")

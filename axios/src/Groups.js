@@ -6,10 +6,10 @@ export default {
 	},
 
 	getGroup: (id) => {
-		return axios.get(`/groups/${id}`);
+		return axios.get(`/groups?name=${id}`);
 	},
 
-	exitGroup: (id) => {
-		return axios.delete(`/groups/${id}`);
+	sendMessage: (name, msg, uid, username, time) => {
+		return axios.put(`/groups`, {name, msg, uid, username, time});
 	}
 }

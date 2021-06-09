@@ -38,19 +38,10 @@
         </nav>
         <section class="columns flex-expand-simple">
             <div class="column is-one-fifth" id="bottom-left-col" style="padding-left: 25px; display:flex; flex-direction: column;">
-                <!-- <BoxButton text="Grupos" :border="true" :round="true"
-                @click.native = "toGroups"
-                imgsrc="https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Fusers-solid.svg?alt=media&token=0b0313a3-5515-40b8-b5a5-99909086a20c"
-                />
-                <br>
-                <BoxButton text="Amigos" :border="true" :round="false"
-                @click.native = "toFriends"
-                imgsrc="https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Fheart-solid.svg?alt=media&token=e7f54740-6e0b-4406-801f-b93e9ff4e79c"
-                /> --> 
                 <div style="flex: 0 0 auto; min-width: 0;">
                     <div class="flex-container" style="padding-bottom: 10px;">
                         <div class="flex-expand-simple v-align">
-                            <p>Friends</p>
+                            <b>Friends</b>
                         </div>
                         <div class="v-align">
                             <b-icon @click.native="toFriends"  class="clickable" pack="fas" icon="cog" size="is-large"></b-icon>
@@ -61,7 +52,7 @@
                 <div style="flex: 0 5 auto; min-width:0;">
                     <div class="flex-container" style="padding-bottom: 10px;">
                         <div class="flex-expand-simple v-align">
-                            <p>Groups</p>
+                            <b>Groups</b>
                         </div>
                         <div class="v-align">
                             <b-icon @click.native="toGroups"  class="clickable" pack="fas" icon="cog" size="is-large"></b-icon>
@@ -71,7 +62,6 @@
                 </div>
             </div>
             <div class="column" id="bottom-mid-col" style="padding-top: 0;">
-                <!-- <MessagesArea v-if="otherUser" type="private" :chatWith="otherUser.uid"/> -->
                 <MessagesArea v-if="currentRecipient" :chatSettings="currentRecipient" :key="currentRecipient.chatId"/>
                 <section v-else class="flex-container direction-col has-text-centered" style="height: 100%; background-color: #ede7e4; justify-content: center; align-items:center;">
                     <img src="https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Fwatermark_gray.png?alt=media&token=7d286ecd-c041-44d6-b4a9-07f55975c5af"
