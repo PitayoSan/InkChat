@@ -12,17 +12,16 @@
 <style scoped>
 .box-button {
     transition: 0.15s;
-    
 }
 
 .round-img{
-    max-height: 64px;
-    max-width: 64px;
+    height: 64px;
+    width: 64px;
 }
 
 .round-img img{
-    height: 100px;
-    width: 100px;
+    height: 100%;
+    width: 100%;
     object-fit: cover;
     border-radius: 50%;
 }
