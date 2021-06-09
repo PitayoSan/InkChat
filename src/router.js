@@ -8,7 +8,8 @@ import Test from './views/Test';
 import Friends from './views/Friends';
 import Groups from './views/Groups';
 import Layout from './views/Layout';
-import {auth} from './firebase';
+import { userIsSignedIn } from './firebase';
+import store from './store/index';
 
 const routes = [
     { path: '/', component: Login, meta: {requiresAuth: false}},
@@ -29,18 +30,23 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-    
     const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
 
     if(requiresAuth) {
-
-        if(auth.currentUser) {
-
-            return next();
-
+        let user = await userIsSignedIn;
+        console.log(user? "yes user": user);
+        if(user) {
+            let dbUser = await store.dispatch('fetchUserProfile', user);
+            if(dbUser) {
+                console.log("Entering page...");
+                return next();
+            } else {
+                console.log("error fetching user from database")
+                return next(false);
+            }
         }
-
-        return next(false);
+        console.log("user is not signed in");
+        return next(false); // TODO return to login page
 
     }
 

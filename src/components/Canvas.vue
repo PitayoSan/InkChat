@@ -148,7 +148,6 @@ export default {
   mounted() {
         
         this.canvas = document.getElementById(this.theName)
-        console.log("CANVAS: ", this.theName)
         this.ctx = this.canvas.getContext('2d');
         this.onColorSelect(this.inkColors[0]);
         this.onWidthSelect(5);
