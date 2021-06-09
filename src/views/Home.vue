@@ -7,8 +7,8 @@
             </div>
             <div class="column flex-container is-align-items-end flex-container is-align-items-end no-bot" id="upper-mid-col" >
                 <BoxButton
-                :text="chatSettings.with.username" 
-                :imgsrc="chatSettings.with.pp" 
+                :text="chatSettings.username" 
+                :imgsrc="chatSettings.pp" 
                 :border="true"
                 :round="true"
                 :displayOnly="true"
@@ -92,9 +92,9 @@ export default {
     created() {
         console.log("PROFILE: ", this.userProfile);
         let chatwith = this.$route.query.chatwith; //contains uid/group name to connect with
-
+        
         if(this.uidIsValid(chatwith))
-            this.chatSettings = {}
+            this.chatSettings = this.userProfile.friends[chatwith]
 
     },
     methods: {

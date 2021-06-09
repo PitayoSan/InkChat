@@ -21,7 +21,7 @@ export default {
     methods: {
         sendMessage() {
             let msg = this.$refs['ownCanvas'].getImageData();
-            this.$pnPublish({channel: `ch_${this.chatSettings.with.uid}`, message: msg, meta: {uid: this.userProfile.uid, pp: this.userProfile.pp}});
+            this.$pnPublish({channel: this.chatSettings.channel, message: msg, meta: {uid: this.userProfile.uid, pp: this.userProfile.pp}});
             // this.$pnPublish({channel: `ch_${auth.currentUser.uid}`, message: msg, meta: {uid: this.userProfile.uid, pp: this.userProfile.pp}});
             this.$refs['ownCanvas'].clearCanvas()
         }
