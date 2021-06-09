@@ -8,16 +8,21 @@
 <script>
 import Canvas from './Canvas';
 import { mapState } from 'vuex';
+// import { auth } from '../firebase';
 
 export default {
     name: 'CanvasArea',
     components: {
         Canvas
     },
+    props: {
+        chatSettings: Object
+    },
     methods: {
         sendMessage() {
             let msg = this.$refs['ownCanvas'].getImageData();
-            this.$pnPublish({channel: 'demo', message: msg, meta: {uid: this.userProfile.uid, pp: this.userProfile.pp}});
+            this.$pnPublish({channel: `ch_${this.chatSettings.with.uid}`, message: msg, meta: {uid: this.userProfile.uid, pp: this.userProfile.pp}});
+            // this.$pnPublish({channel: `ch_${auth.currentUser.uid}`, message: msg, meta: {uid: this.userProfile.uid, pp: this.userProfile.pp}});
             this.$refs['ownCanvas'].clearCanvas()
         }
     },

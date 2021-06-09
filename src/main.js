@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
-import { auth } from './firebase'
+// import { auth } from './firebase'
 import store from './store'
 import PubNubVue from 'pubnub-vue'
 import router from './router';
@@ -43,7 +43,7 @@ Vue.use(VueRouter);
 // PubNub Config
 const publishKey = 'pub-c-75662b11-93bd-4398-aa9b-a1a1a525c08f'
 const subscribeKey = 'sub-c-466e468a-a2fe-11eb-b1ae-be4e92e38e16'
-store.commit('setPubNubUUID', 'test_uuid')
+
 
 Vue.use(PubNubVue, {
 	publishKey,
@@ -51,24 +51,46 @@ Vue.use(PubNubVue, {
 	ssl: true
 }, store)
 
-// new Vue({
-// 	router,
-// 	store,
-// 	render: h => h(App)
-// }).$mount('#app')
+new Vue({
+	router,
+	store,
+	render: h => h(App)
+}).$mount('#app')
 
-let app;
-auth.onAuthStateChanged(user => {
-	if(!app) {
-		app = new Vue({
-			router,
-			store,
-			render: h => h(App)
-		}).$mount('#app')
-	}
+console.log("app created!");
 
-	if(user) {
-		console.log("fetching from main")
-		store.dispatch('fetchUserProfile', user)
-	}
-});
+
+// const appIsLoaded = new Promise(resolve => {
+// 	let app;
+// 	auth.onAuthStateChanged(user => {
+// 		if(!app) {
+// 			app = new Vue({
+// 				router,
+// 				store,
+// 				render: h => h(App)
+// 			}).$mount('#app')
+// 		}
+
+// 		if(user) {
+// 			resolve(store.dispatch('fetchUserProfile', user))
+// 		}
+// 	});
+// })
+
+
+// let app;
+// auth.onAuthStateChanged(user => {
+// 	if(!app) {
+// 		app = new Vue({
+// 			router,
+// 			store,
+// 			render: h => h(App)
+// 		}).$mount('#app')
+// 	}
+
+// 	if(user) {
+// 		store.dispatch('fetchUserProfile', user)
+// 	}
+// });
+
+

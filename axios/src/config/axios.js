@@ -11,7 +11,6 @@ const myAxios = axios.create({
 myAxios.interceptors.request.use(
     async config => {
         const token = await auth.currentUser.getIdToken();
-        console.log(token);
         config.headers = {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/json',

@@ -6,42 +6,24 @@
                 <h1 class="title" style="color: #ff4d8e; width: 100%;">InkChat</h1>
             </div>
             <div class="column flex-container is-align-items-end flex-container is-align-items-end no-bot" id="upper-mid-col" >
-                <!-- <section class="box has-text-left is-marginless" style="width: 100%;"> -->
-                    <!-- <IconName :userData="{
-                        imgsrc:'https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/users%2Ftest%2Fprofile.jpg?alt=media&token=014349b0-9f06-4e8b-8677-8f3660945e60',
-                        username: 'William'
-
-                    }"/> -->
-                    <BoxButton
-                    :text="otherUser.username" 
-                    :imgsrc="otherUser.pp" 
-                    :border="true"
-                    :round="true"
-                    :displayOnly="true"
-                    style="width:100%;"
-                    v-if="otherUser"
-                    />
-                    <!-- <BoxButton
-                    :text="groupName"
-                    :border="true"
-                    :round="true"
-                    :displayOnly="true"
-                    style="width:100%;"
-                    :imgsrc="''"
-                    v-if="chatGroup"
-                    /> -->
-                    <BoxButton
-                    text="Welcome to InkChat!"
-                    :border="true"
-                    :round="true"
-                    :displayOnly="true"
-                    style="width:100%;"
-                    :imgsrc="''"
-                    v-else
-                    />
-                    
-
-                <!-- </section> -->
+                <BoxButton
+                :text="chatSettings.with.username" 
+                :imgsrc="chatSettings.with.pp" 
+                :border="true"
+                :round="true"
+                :displayOnly="true"
+                style="width:100%;"
+                v-if="chatSettings"
+                />
+                <BoxButton
+                text="Welcome to InkChat!"
+                :border="true"
+                :round="true"
+                :displayOnly="true"
+                style="width:100%;"
+                :imgsrc="''"
+                v-else
+                />
             </div>
             <div class="column is-one-fifth no-bot" id="upper-right-col">
                 <BoxButton 
@@ -67,13 +49,11 @@
                 />
             </div>
             <div class="column" id="bottom-mid-col" style="padding-top: 0;">
-                <MessagesArea :isGroup="!otherUser" v-if="otherUser || chatGroup"/>
-                <section class="flex-container direction-col has-text-centered" style="height: 100%; background-color: #ede7e4; justify-content: center;">
-                    <p>chat goes here</p>
-                </section>
+                <!-- <MessagesArea v-if="otherUser" type="private" :chatWith="otherUser.uid"/> -->
+                <MessagesArea v-if="chatSettings" :chatSettings="chatSettings"/>
             </div>
             <div class="column is-one-fifth flex-container is-align-items-end" id="bottom-right-col">
-                <CanvasArea />
+                <CanvasArea v-if="chatSettings" :chatSettings="chatSettings"/>
             </div>
         </section>
     </main>
@@ -86,7 +66,7 @@ import Sidebar from '../components/Sidebar';
 import MessagesArea from '../components/MessagesArea';
 import CanvasArea from '../components/CanvasArea';
 import { mapState } from 'vuex';
-import usersApi from '../../axios/src/Users';
+// import usersApi from '../../axios/src/Users';
 
 export default {
     name: 'Home',
@@ -99,8 +79,7 @@ export default {
     },
     data() {
         return {
-            otherUser: null,
-            chatGroup: false
+            chatSettings: null
         }
     },
     computed: {
@@ -110,19 +89,16 @@ export default {
         }*/
     },
     created() {
-        let otherUid = this.$route.query.chatwith;
-        if(otherUid) {
-            usersApi.getUser(otherUid).then(otherUser => {
-            this.otherUser = otherUser;
-            console.log(otherUser)
-        })
-        }
-        
-        let chatGroup = this.$route.query.chatwithgroup;
-        if(chatGroup) {
-            this.chatGroup = true;
-        }
-        
+        console.log("PROFILE: ", this.userProfile)
+        //let otherUid = this.$route.query.chatwith; //contains uid/group name to connect with
+        // await this.$store.dispatch('fetchUserProfile');
+        // console.log(this.userProfile);
+        // Go through the current user's list of friends
+        // if(otherUid) {
+        //     usersApi.getUser(otherUid).then(otherUser => {
+        //         this.chatSettings = {with: otherUser, type: 'private'};
+        //     })
+        // }
     },
     methods: {
         trigger() {

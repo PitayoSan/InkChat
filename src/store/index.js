@@ -26,37 +26,33 @@ export default new Vuex.Store({
 		setUserGroups(state, groups){
 			state.userGroups = groups;
 		}
-	}, // mutations vs actions: actions can be async
+	}, 
+	// mutations vs actions: actions can be async
 	actions: {
-		// async login(form) {
-		// 	fb.auth.signInWithEmailAndPassword(form.email, form.password)
-		// 	.then(() => { console.log("xd")})
-		// 		.catch(() => {
-		// 			console.log("ERROR LOGGING IN")
-		// 		})
-		// },
-		async fetchUserProfile({ commit, dispatch }) {
+		async fetchUserProfile({ commit }) {
 			// Using firebase uid, fetch all user data from db.
 			let uid = fb.auth.currentUser.uid;
-			console.log("the uid: ", uid);
-			api.usersApi.getUser(uid)
-				.then(dbUser => {
-					// Commit user profile in state
-					commit('setUserProfile', dbUser);
+			
+			try {
+				const dbUser = await api.usersApi.getUser(uid);
+				console.log("fetched user profile");
+				// Commit user profile in state
+				commit('setUserProfile', dbUser);
 
-					// set pubnub uuid:
-					dispatch('setPubNubUUID', 'test_uuid')
+				// Set pubnub uuid:
+				commit('setPubNubUUID', uid);
 
-					// Go to home if user is logged in
-					if (router.currentRoute.path === '/') {
-						router.push('/home')
-					}
+				// // Go to home if user is logged in
+				// if (router.currentRoute.path === '/') {
+				// 	router.push('/home');
+				// }
 
-					return uid;
-				})
-				.catch(() => {
-					console.error("ERROR FETCHING USER FROM DATABASE");
-				});
+				return dbUser;
+
+			} catch {
+				// console.error("ERROR FETCHING USER FROM DATABASE");
+				return false;
+			}
 		},
 		async logout({ commit }) {
 			// log user out
@@ -78,9 +74,9 @@ export default new Vuex.Store({
 				console.log(error);
 			});
 		},
-		setPubNubUUID({ commit }, uuid) {
-			commit('setPubNubUUID', uuid);
-		},
+		// setPubNubUUID({ commit }, uuid) {
+		// 	commit('setPubNubUUID', uuid);
+		// },
 		async getUserFriends({ commit }) {
 			let uid = fb.auth.currentUser.uid;
 			console.log(uid);

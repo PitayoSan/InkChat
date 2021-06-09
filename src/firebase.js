@@ -12,7 +12,25 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
+const sessionPersistence = firebase.auth.Auth.Persistence.SESSION;
+
+const userIsSignedIn = new Promise(resolve => {
+    auth.onAuthStateChanged(user => {
+        if(user) {
+            console.log("FIREBASE: user loaded!")
+            resolve(user);
+        }
+        // else { CAUSES ERRORS
+        //     console.log("login wtf");
+        //     // resolve(false);
+        // }
+    });
+});
+
+console.log("Firebase config loaded!")
 
 export {
 	auth,
+    sessionPersistence,
+    userIsSignedIn
 }
