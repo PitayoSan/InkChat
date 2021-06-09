@@ -12,7 +12,7 @@
                 <div class="p-1 flex-center top-element">
                     <div class="container">
                         <img :src=userProfile.pp
-                            onerror="this.src='https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Falt.png?alt=media&token=7e0feced-f0b9-45c4-92f4-8ec9df70168c'"
+                            v-bind:onerror="this.backoffpp"
                         >
                     </div>
                     <div>
@@ -28,19 +28,20 @@
                     </b-button>   
                 </div>
                 <hr style="border: 0.5px solid #dedede; margin-right: 20px; margin-left: 20px;">
-                <div class="p-1 flex-center">
-                    <b>Pending friend requests</b>
-                    <FriendRequest fname="🅱iguel" imgsrc='octoling.jpg'/>
-                    <FriendRequest fname="Wis" imgsrc='inkling.jpg'/>
-                    <FriendRequest fname="Rodrigo" imgsrc='kingpin.jpg'/>
-                    <FriendRequest fname="Vítor" imgsrc='palutena.png'/>
+                <div v-if="friendRequests.length > 0" class="flex-grow-scroll flex-expand-simple">
+                    <div class="p-1 flex-center" v-for="friend of friendRequests" :key="friend">
+                        <b>Pending friend requests</b>
+                        <FriendRequest :uuid="userProfile.uid" :fname="friend.username" :fuid="friend.uid" :src="friend.pp"/>
+                    </div>
+                </div>
+                <div v-else class="flex-expand-simple">
+                    <b class="p-1 flex-center">No pending friend requests</b>
                 </div>
                 <div class="bottom">
-                    <b-input placeholder="Username" size="is-small"></b-input>
-                    <b-button tag="a"
+                    <b-input v-model="newFR" placeholder="Username" size="is-small" required></b-input>
+                    <b-button @click="searchUser" tag="a"
                         size="is-large"
-                        type="is-info is-light"
-                        href="/search-usr">
+                        type="is-info is-light">
                         Send friend request
                     </b-button>
                 </div>
@@ -52,6 +53,7 @@
 <script>
 import FriendRequest from './FriendRequest.vue';
 import { mapState } from 'vuex';
+import friendsApi from '../../axios/src/Friends';
 
 export default {
   name: 'Sidebar',
@@ -60,11 +62,26 @@ export default {
   },
   data() {
     return {
-      open: false
+      open: false,
+      backoffpp: "this.src='https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Falt.png?alt=media&token=7e0feced-f0b9-45c4-92f4-8ec9df70168c'",
+      newFR: null
     }
   },
   computed: {
-      ...mapState(['userProfile'])
+      ...mapState(['userProfile']),
+        friendRequests: function () {
+            let processedRequests = [];
+            for (const [key, friend] of Object.entries(this.userProfile.friends)) {
+                if (!friend["is_friends"]) {
+                    processedRequests.push({
+                        "username": friend["username"],
+                        "uid": key,
+                        "pp": friend["pp"]
+                    })
+                }
+            }
+            return processedRequests;
+        },
   },
   methods: {
       openTrue() {
@@ -72,6 +89,14 @@ export default {
       },
       logout() {
           this.$store.dispatch('logout');
+      },
+      searchUser() {
+          friendsApi.sendFR(this.userProfile.uid, this.newFR).then(() => {
+              this.$buefy.dialog.alert("Friend request successfully sent! uwu");
+          })
+          .catch(() => {
+              this.$buefy.dialog.alert("Invalid user or friend request owo");
+          });
       }
   }
 }
@@ -119,7 +144,6 @@ export default {
     }
 
     .bottom{
-        position: absolute;
         bottom: 20px;
         width: 100%;
         display: flex;

@@ -66,7 +66,7 @@ export default {
     },
 
     computed: {
-        ...mapState(['userFriends'])
+        ...mapState(['userProfile', 'userFriends'])
     },
 
     created: function(){
@@ -80,8 +80,13 @@ export default {
         async getUser(id){
             return await userApi.getUser(id);
         },
-        deleteFriend(id){
-            friendsApi.deleteFriend(id);
+        deleteFriend(friend){
+            friendsApi.deleteFriend(this.userProfile.uid, friend).then(() => {
+                this.$buefy.dialog.alert("Friend successfully removed unu");
+            })
+            .catch(() => {
+                this.$buefy.dialog.alert("Invalid user owo");
+            });
         }
     }
 }
