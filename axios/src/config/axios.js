@@ -10,12 +10,17 @@ const myAxios = axios.create({
 // Request interceptor (attach authorization header)
 myAxios.interceptors.request.use(
     async config => {
-        const token = await auth.currentUser.getIdToken();
+        console.log("request interceptor")
         config.headers = {
-            'Authorization': `Bearer ${token}`,
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
+        if(auth.currentUser) {
+            // console.log("appending token");
+            const token = await auth.currentUser.getIdToken();
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+
         return config;
     },
     () => {
@@ -31,6 +36,7 @@ myAxios.interceptors.response.use(
     async error => {
 
         if(!error.response) {
+            console.log(error)
             throw {message: "Error de conexión con el servidor."};
         }
         
