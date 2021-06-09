@@ -1,5 +1,6 @@
 <template>
     <main class="full-height flex-col">
+        <FriendSettings ref="friendModal" />
         <Sidebar ref="sbar"/>
         <nav class="columns app-title">
             <div class="column is-one-fifth flex-container has-text-centered is-align-items-center no-bot" id="upper-left-col">
@@ -44,7 +45,7 @@
                             <b>Friends</b>
                         </div>
                         <div class="v-align">
-                            <b-icon @click.native="toFriends"  class="clickable" pack="fas" icon="cog" size="is-large"></b-icon>
+                            <b-icon @click.native="toggleModalFriends"  class="clickable" pack="fas" icon="cog" size="is-large"></b-icon>
                         </div>
                     </div>
                     <FChatList ref="fChatList" @selected="setChat"/>
@@ -86,6 +87,7 @@ import CanvasArea from '../components/CanvasArea';
 import { mapState } from 'vuex';
 import FChatList from '../components/FChatList';
 import GChatList from '../components/GChatList';
+import FriendSettings from '../components/FriendSettings';
 
 export default {
     name: 'Home',
@@ -95,11 +97,13 @@ export default {
         MessagesArea,
         CanvasArea,
         FChatList,
-        GChatList
+        GChatList,
+        FriendSettings
     },
     data() {
         return {
-            currentRecipient: null
+            currentRecipient: null,
+            friendsModalOpen: false
         }
     },
     computed: {
@@ -118,6 +122,9 @@ export default {
         setChat(recipient) {
             console.log("recipient is: ", recipient)
             this.currentRecipient = recipient;
+        },
+        toggleModalFriends() {
+            this.$refs.friendModal.toggleOpen()
         }
     }
 }
