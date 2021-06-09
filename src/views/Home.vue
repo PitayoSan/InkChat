@@ -37,7 +37,7 @@
             </div>
         </nav>
         <section class="columns flex-expand-simple">
-            <div class="column is-one-fifth" id="bottom-left-col">
+            <div class="column is-one-fifth" id="bottom-left-col" style="padding-left: 25px;">
                 <!-- <BoxButton text="Grupos" :border="true" :round="true"
                 @click.native = "toGroups"
                 imgsrc="https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Fusers-solid.svg?alt=media&token=0b0313a3-5515-40b8-b5a5-99909086a20c"
@@ -46,8 +46,17 @@
                 <BoxButton text="Amigos" :border="true" :round="false"
                 @click.native = "toFriends"
                 imgsrc="https://firebasestorage.googleapis.com/v0/b/inkchat-58958.appspot.com/o/icons%2Fheart-solid.svg?alt=media&token=e7f54740-6e0b-4406-801f-b93e9ff4e79c"
-                /> -->
-                <ChatList @selected="setChat"/>
+                /> --> 
+                
+                <div class="flex-container" style="padding-bottom: 10px;">
+                    <div class="flex-expand-simple v-align">
+                        <p>Chats</p>
+                    </div>
+                    <div class="v-align">
+                        <b-icon @click.native="toFriends"  class="clickable" pack="fas" icon="cog" size="is-large"></b-icon>
+                    </div>
+                </div>
+                <ChatList ref="chatList" @selected="setChat"/>
             </div>
             <div class="column" id="bottom-mid-col" style="padding-top: 0;">
                 <!-- <MessagesArea v-if="otherUser" type="private" :chatWith="otherUser.uid"/> -->

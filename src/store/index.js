@@ -10,7 +10,6 @@ export default new Vuex.Store({
 	state: {
 		userProfile: {},
 		pubNubUUID: {},
-		userFriends: {},
 		userGroups: {}
 	},
 	mutations: {
@@ -19,9 +18,6 @@ export default new Vuex.Store({
 		},
 		setPubNubUUID(state, uuid) {
 			state.pubNubUUID = uuid;
-		},
-		setUserFriends(state, friends){
-			state.userFriends = friends;
 		},
 		setUserGroups(state, groups){
 			state.userGroups = groups;
@@ -73,18 +69,6 @@ export default new Vuex.Store({
 			}).catch(function(error) {
 				// An error happened.
 				console.log(error);
-			});
-		},
-		// setPubNubUUID({ commit }, uuid) {
-		// 	commit('setPubNubUUID', uuid);
-		// },
-		async getUserFriends({ commit }) {
-			let uid = fb.auth.currentUser.uid;
-			console.log(uid);
-			
-			api.friendsApi.getFriends(uid)
-			.then(res => {
-				commit('setUserFriends', res);
 			});
 		},
 		async getUserGroups({ commit }) {

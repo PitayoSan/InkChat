@@ -67,3 +67,7 @@
 }
 
 /*** PADDING START ***/
+
+.clickable {
+    cursor: pointer;
+}
