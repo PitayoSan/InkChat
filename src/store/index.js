@@ -35,6 +35,7 @@ export default new Vuex.Store({
 			
 			try {
 				const dbUser = await api.usersApi.getUser(uid);
+				console.log("the dbuser: ", dbUser)
 				console.log("fetched user profile");
 				// Commit user profile in state
 				commit('setUserProfile', dbUser);

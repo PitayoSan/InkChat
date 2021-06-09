@@ -51,6 +51,7 @@
             <div class="column" id="bottom-mid-col" style="padding-top: 0;">
                 <!-- <MessagesArea v-if="otherUser" type="private" :chatWith="otherUser.uid"/> -->
                 <MessagesArea v-if="chatSettings" :chatSettings="chatSettings"/>
+                
             </div>
             <div class="column is-one-fifth flex-container is-align-items-end" id="bottom-right-col">
                 <CanvasArea v-if="chatSettings" :chatSettings="chatSettings"/>
@@ -89,16 +90,12 @@ export default {
         }*/
     },
     created() {
-        console.log("PROFILE: ", this.userProfile)
-        //let otherUid = this.$route.query.chatwith; //contains uid/group name to connect with
-        // await this.$store.dispatch('fetchUserProfile');
-        // console.log(this.userProfile);
-        // Go through the current user's list of friends
-        // if(otherUid) {
-        //     usersApi.getUser(otherUid).then(otherUser => {
-        //         this.chatSettings = {with: otherUser, type: 'private'};
-        //     })
-        // }
+        console.log("PROFILE: ", this.userProfile);
+        let chatwith = this.$route.query.chatwith; //contains uid/group name to connect with
+
+        if(this.uidIsValid(chatwith))
+            this.chatSettings = {}
+
     },
     methods: {
         trigger() {
@@ -109,6 +106,20 @@ export default {
         },
         toGroups(){
             this.$router.push("/groups");
+        },
+        uidIsValid(uid) {
+            if(!uid)
+                return false;
+            
+            const friends = Object.keys(this.userProfile.friends);
+            for(let fuid of friends) {
+                if(fuid === uid) {
+                    return true;
+                }
+            }
+
+            // TODO filter through groups
+
         }
     }
 }

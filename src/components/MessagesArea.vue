@@ -10,7 +10,6 @@
 <script>
 import ChatBubble from './ChatBubble';
 import { mapState } from 'vuex';
-import { auth } from '../firebase';
 
 export default {
     name: 'MessagesArea',
@@ -22,39 +21,31 @@ export default {
     },
     data() {
         return {
-            other_msgs: this.$pnGetMessage(`ch_${auth.currentUser.uid}`, this.received),
-            my_msgs: this.$pnGetMessage(`ch_${this.chatSettings.with.uid}`, this.received)
-            // .filter(m => {
-            //     return m.userMetadata.uid = this.chatSettings.with.uid;
-            // })
-            // msgs: this.$pnGetMessage(`ch_${this.chatSettings.with}`, this.received)
-                // .filter(msg => msg.userMetadata.uid === auth.currentUser.uid)
+            msgs: this.$pnGetMessage(this.chatSettings.channel, this.received)
         }
     },
     methods: {
         received(msg) {
             console.log("received msg: ", msg)
-        },
-        the_latest() {
-            // let other = this.other_msgs.filter(m => m.userMetadata.uid === auth.currentUser.uid)
-            // let my = this.my_msgs.filter(m => m.userMetadata.uid === this.chatSettings.with.uid)
-            
         }
     },
     computed: {
-        ...mapState(['pubNubUUID']),
-        latest() {
-            let combined = this.other_msgs.concat(this.my_msgs);
-            console.log(combined)
-            return combined.sort((a,b) => +a.timetoken - +b.timetoken);
-        }
+        ...mapState(['userProfile']),
+        // latest() {
+        //     let combined = this.other_msgs.concat(this.my_msgs);
+        //     console.log(combined)
+        //     return combined.sort((a,b) => +a.timetoken - +b.timetoken);
+        // }
+    },
+    created() {
+        console.log("messages area says: ", this.userProfile)
     },
     mounted() {
         console.log("with: ", this.chatSettings.with)
         // let channel = this.chatSettings.type === 'private' ? `ch_${auth.currentUser.uid}` : `ch_${this.chatSettings.with}`;
         // console.log("the channel will be: ", channel);
         // console.log("the other user will be: ", this.chatSettings.with)
-        this.$pnSubscribe({channels: [`ch_${auth.currentUser.uid}`, `ch_${this.chatSettings.with.uid}`],  withPresence: true });
+        this.$pnSubscribe({channels: [this.chatSettings.channel],  withPresence: true });
     }
 }
 </script>
