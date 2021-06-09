@@ -50,13 +50,22 @@
                 
                 <div class="flex-container" style="padding-bottom: 10px;">
                     <div class="flex-expand-simple v-align">
-                        <p>Chats</p>
+                        <p>Friends</p>
                     </div>
                     <div class="v-align">
                         <b-icon @click.native="toFriends"  class="clickable" pack="fas" icon="cog" size="is-large"></b-icon>
                     </div>
                 </div>
-                <ChatList ref="chatList" @selected="setChat"/>
+                <FChatList ref="fChatList" @selected="setChat"/>
+                <div class="flex-container" style="padding-bottom: 10px;">
+                    <div class="flex-expand-simple v-align">
+                        <p>Groups</p>
+                    </div>
+                    <div class="v-align">
+                        <b-icon @click.native="toGroups"  class="clickable" pack="fas" icon="cog" size="is-large"></b-icon>
+                    </div>
+                </div>
+                <GChatList ref="gChatList" @selected="setChat"/>
             </div>
             <div class="column" id="bottom-mid-col" style="padding-top: 0;">
                 <!-- <MessagesArea v-if="otherUser" type="private" :chatWith="otherUser.uid"/> -->
@@ -82,7 +91,8 @@ import Sidebar from '../components/Sidebar';
 import MessagesArea from '../components/MessagesArea';
 import CanvasArea from '../components/CanvasArea';
 import { mapState } from 'vuex';
-import ChatList from '../components/ChatList';
+import FChatList from '../components/FChatList';
+import GChatList from '../components/GChatList';
 
 export default {
     name: 'Home',
@@ -91,7 +101,8 @@ export default {
         Sidebar,
         MessagesArea,
         CanvasArea,
-        ChatList
+        FChatList,
+        GChatList
     },
     data() {
         return {
