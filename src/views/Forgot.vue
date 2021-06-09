@@ -9,17 +9,42 @@
             </p>
             <br><br>
             <b-field>
-                <b-input type="email"></b-input>
+                <b-input v-model="email" type="email"></b-input>
             </b-field>
             <br>
-            <b-button>Recover Password</b-button>
+            <b-button @click="sendPwdRecovery">Recover Password</b-button>
         </section>
     </main>
 </template>
 
 <script>
+import { auth } from '../firebase';
+
 export default {
-    name: 'Forgot'
+    name: 'Forgot',
+    data() {
+        return {
+            email: null
+        }
+    },
+    methods: {
+        sendPwdRecovery() {
+            auth.sendPasswordResetEmail(this.email)
+            .then(() => {
+                this.$buefy.dialog.alert("Password recovery mail sent successfully.");
+
+            })
+            .catch(() => {
+                this.$buefy.dialog.alert({
+                        title: 'Error',
+                        message: 'There was an error with your request. Try again later.',
+                        type: 'is-danger',
+                        hasIcon: true,
+                        icon: 'times-circle',
+                    })
+            })
+        }
+    }
 }
 </script>
 
