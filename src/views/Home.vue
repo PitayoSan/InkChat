@@ -55,9 +55,10 @@
                     </div>
                     <GChatList ref="gChatList" @selected="setChat"/>
                 </div>
-                <div class="bottom">
+                <div class="flex-expand-simple"></div>
+                <div>
                     <b-input v-model="newGroup" placeholder="Group name" size="is-small" required></b-input>
-                    <b-button @click="createGroup" tag="a"
+                    <b-button @click="createGroup" tag="a" expanded
                         size="is-large"
                         type="is-info is-light">
                         Create group
